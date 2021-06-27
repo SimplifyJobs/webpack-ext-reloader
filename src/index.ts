@@ -5,13 +5,10 @@ import { setLogLevel } from "./utils/logger";
 
 install();
 
-const logLevel = process.env.NODE_ENV
-  ? {
-      development: DEBUG,
-      production: ERROR,
-      test: NONE,
-    }[process.env.NODE_ENV]
-  : ERROR;
+let logLevel: LOG_LEVEL = ERROR;
+if (process.env.NODE_ENV !== "production") {
+  logLevel = DEBUG
+}
 
 setLogLevel(logLevel);
 export = ExtensionReloaderImpl;
