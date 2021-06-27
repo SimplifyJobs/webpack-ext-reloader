@@ -1,6 +1,6 @@
 {
-  "name": "@simplifyJobs/webpack-extension-reloader",
-  "version": "1.1.4",
+  "name": "@legitatx/webpack-extension-reloader",
+  "version": "1.1.5",
   "private": false,
   "description": "Watch for changes and force the reload of the browser extension",
   "main": "dist/webpack-extension-reloader.js",
@@ -8,7 +8,7 @@
   "types": "typings/webpack-extension-reloader.d.ts",
   "repository": {
     "type": "git",
-    "url": "git://github.com/rubenspgcavalcante/webpack-extension-reloader.git"
+    "url": "git://github.com/SimplifyJobs/webpack-extension-reloader.git"
   },
   "husky": {
     "hooks": {
@@ -38,9 +38,9 @@
   "author": "Rubens Pinheiro Gonçalves Cavalcante",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/rubenspgcavalcante/webpack-extension-reloader/issues"
+    "url": "https://github.com/SimplifyJobs/webpack-extension-reloader/issues"
   },
-  "homepage": "https://github.com/rubenspgcavalcante/webpack-extension-reloader#readme",
+  "homepage": "https://github.com/SimplifyJobs/webpack-extension-reloader#readme",
   "keywords": [
     "webpack",
     "plugin",
