@@ -7,7 +7,7 @@ install();
 
 let logLevel: LOG_LEVEL = ERROR;
 if (process.env.NODE_ENV !== "production") {
-  logLevel = DEBUG
+  logLevel = DEBUG;
 }
 
 setLogLevel(logLevel);

@@ -1,4 +1,4 @@
-import { Compiler, Compilation } from "webpack";
+import { Compilation, Compiler } from "webpack";
 
 export default class CompilerEventsFacade {
   public static extensionName = "webpack-extension-reloader";
@@ -14,17 +14,15 @@ export default class CompilerEventsFacade {
     call: (compilation: Compilation, chunks: Compilation["chunks"]) => void,
   ) {
     return this._legacyTapable
-      ? (this._compiler as any).plugin("compilation", (comp) =>
-          comp.plugin("after-optimize-chunk-assets", (chunks) =>
+      ? (this._compiler as any).plugin("compilation",comp =>
+          comp.plugin("after-optimize-chunk-assets",chunks =>
             call(comp, chunks),
           ),
         )
       : this._compiler.hooks.compilation.tap(
-          CompilerEventsFacade.extensionName,
-          (comp) =>
+          CompilerEventsFacade.extensionName,comp =>
             comp.hooks.afterOptimizeChunkAssets.tap(
-              CompilerEventsFacade.extensionName,
-              (chunks) => call(comp, chunks),
+              CompilerEventsFacade.extensionName,chunks => call(comp, chunks),
             ),
         );
   }

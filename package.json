@@ -1,26 +1,25 @@
 {
-  "name": "@legitatx/webpack-extension-reloader",
+  "name": "webpack-ext-reloader",
   "version": "1.1.6",
   "private": false,
-  "description": "Watch for changes and force the reload of the browser extension",
+  "description": "Watch for file changes and reload WebExtensions on browsers.",
   "main": "dist/webpack-extension-reloader.js",
   "bin": "./dist/webpack-extension-reloader-cli.js",
   "types": "typings/webpack-extension-reloader.d.ts",
   "repository": {
     "type": "git",
-    "url": "git://github.com/SimplifyJobs/webpack-extension-reloader.git"
+    "url": "git://github.com/SimplifyJobs/webpack-ext-reloader.git"
   },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "yarn test"
+      "pre-push": "npm test"
     }
   },
   "lint-staged": {
     "*.{ts}": [
-      "yarn lint:files",
-      "yarn format:files",
-      "git add"
+      "npm run lint:files",
+      "npm run format:files"
     ]
   },
   "scripts": {
@@ -29,7 +28,7 @@
     "analyze": "NODE_ENV=production webpack --env.analyze",
     "start:dev": "NODE_ENV=development webpack --watch",
     "start:sample": "NODE_ENV=development webpack --config sample/webpack.plugin.js --watch",
-    "prepublishOnly": "yarn build",
+    "prepublishOnly": "npm build",
     "lint": "tslint \"{src,client,typings,specs}/**/*.ts\" --fix --format codeFrame",
     "format": "prettier --write \"{src,client,typings,specs}/**/*.ts\"",
     "lint:files": "tslint --fix --format codeFrame",
@@ -38,9 +37,9 @@
   "author": "Rubens Pinheiro Gonçalves Cavalcante",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/SimplifyJobs/webpack-extension-reloader/issues"
+    "url": "https://github.com/SimplifyJobs/webpack-ext-reloader/issues"
   },
-  "homepage": "https://github.com/SimplifyJobs/webpack-extension-reloader#readme",
+  "homepage": "https://github.com/SimplifyJobs/webpack-ext-reloader#readme",
   "keywords": [
     "webpack",
     "plugin",

@@ -28,9 +28,8 @@ export function extractEntries(
   const bgScriptFileNames = background.scripts;
   const toRemove = (filename as string).replace("[name]", "");
 
-  const bgWebpackEntry = Object.keys(webpackEntry).find((entryName) =>
-    bgScriptFileNames.some(
-      (bgManifest) => bgManifest.replace(toRemove, "") === entryName,
+  const bgWebpackEntry = Object.keys(webpackEntry).find(entryName =>
+    bgScriptFileNames.some(bgManifest => bgManifest.replace(toRemove, "") === entryName,
     ),
   );
 
@@ -39,11 +38,11 @@ export function extractEntries(
   }
 
   const contentEntries: unknown = content_scripts
-    ? flatMapDeep(Object.keys(webpackEntry), (entryName) =>
+    ? flatMapDeep(Object.keys(webpackEntry),entryName =>
         content_scripts.map(({ js }) =>
           js
-            .map((contentItem) => contentItem.replace(toRemove, ""))
-            .filter((contentItem) => contentItem === entryName),
+            .map(contentItem => contentItem.replace(toRemove, ""))
+            .filter(contentItem => contentItem === entryName),
         ),
       )
     : null;
