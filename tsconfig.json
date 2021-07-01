@@ -22,7 +22,7 @@
     "typings/webpack-extension-reloader.d.ts"
   ],
   "include": ["client/**/*", "src/**/*", "specs/**/*", "typings/*.d.ts"],
-  "exclude": ["node_modules", "**/*.spec.ts", "**/*.raw.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts", "**/*.raw.ts", "src/utils/env.js"],
   "extensions": {
     ".ts": "TS",
     ".js": "JS"
