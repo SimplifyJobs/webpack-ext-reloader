@@ -2,7 +2,7 @@
 
 Before create any pull requests, please open a issue explaining the situation
 
-- Be sure to follow the tslint rules and run the prettier
+- Be sure to follow the eslint rules and run the prettier
 - Be sure **before open the pull request**, to test the existent code and/or create tests if you made a new feature or
 changed a already existing one.
 
@@ -12,20 +12,20 @@ Should be in the format:
 
 ```text
 **Type:**
-  - [x] bug  
+  - [x] bug
   - [ ] feature
   - [ ] enhancement
   - [ ] question
- 
+
 **Environment:**
   - OS: Windows 10
-  - Version: 0.6.0 
- 
+  - Version: 0.6.0
+
 **Going to open a PR:**
   - [x] yes
   - [ ] no
- 
-**Description:**  
+
+**Description:**
 The messages aren't showing on the console
 ```
 
@@ -47,13 +47,13 @@ already resolved stuff. Be aware that your PR can be denied if you don't follow 
 ### Building and Testing
 
 Inside this repository have an example plugin, so you can test and see it working
-After cloning the repository, run:  
+After cloning the repository, run:
 
 ```bash
 yarn build
 ```
 
- And then run:  
+ And then run:
 
  ```bash
  yarn start:sample

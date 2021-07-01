@@ -40,6 +40,7 @@ export default class ExtensionReloaderImpl extends AbstractPluginReloader
   ) {
     const changedChunks = [] as Chunk[];
 
+    // eslint-disable-next-line no-restricted-syntax
     for (const chunk of chunks) {
       const oldVersion = this._chunkVersions[chunk.name];
       this._chunkVersions[chunk.name] = chunk.hash;

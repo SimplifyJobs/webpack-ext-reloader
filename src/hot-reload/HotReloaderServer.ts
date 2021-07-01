@@ -5,6 +5,7 @@ import SignEmitter from "./SignEmitter";
 
 export default class HotReloaderServer {
   private _server: Server;
+
   private _signEmitter: SignEmitter;
 
   constructor(port: number) {
@@ -31,8 +32,8 @@ export default class HotReloaderServer {
   ): Promise<any> {
     if (this._signEmitter) {
       return this._signEmitter.safeSignChange(reloadPage, onlyPageChanged);
-    } else {
+    } 
       return Promise.resolve(null);
-    }
+    
   }
 }

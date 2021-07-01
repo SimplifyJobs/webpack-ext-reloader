@@ -1,3 +1,4 @@
+/* eslint-disable no-multi-str */
 import { WARN } from "../constants/log.constants";
 import Message from "./Message";
 

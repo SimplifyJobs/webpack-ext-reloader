@@ -20,6 +20,7 @@ export default class SignEmitter {
     onSuccess: (val?: any) => void,
     onError: (err: Error) => void,
   ) => void;
+
   private _server: Server;
 
   constructor(server: Server, { family, major, minor, patch }: Agent) {
@@ -79,6 +80,7 @@ export default class SignEmitter {
   ) {
     const versionPairs: VersionPair[] = zip(browserVersion, targetVersion);
 
+    // eslint-disable-next-line no-restricted-syntax
     for (const [version = 0, target = 0] of versionPairs) {
       if (version !== target) {
         return version > target;

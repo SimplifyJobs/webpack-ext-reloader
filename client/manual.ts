@@ -1,4 +1,4 @@
-// tslint:disable: max-line-length
+/* eslint-disable no-useless-escape */
 import {
   DEFAULT_BACKGROUND_ENTRY,
   DEFAULT_CONFIG,

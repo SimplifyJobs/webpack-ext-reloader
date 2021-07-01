@@ -1,4 +1,4 @@
-/* tslint:disable */
+/* eslint:disable */
 /* -------------------------------------------------- */
 /*      Start of Webpack Hot Extension Middleware     */
 /* ================================================== */
@@ -11,7 +11,7 @@
 
   (function() {
     `<%= polyfillSource %>`;
-  }).bind(injectionContext)();
+  })();
 
   const { browser }: any = injectionContext || {};
   const signals: any = JSON.parse('<%= signals %>');
@@ -48,9 +48,10 @@
           logger("Detected Changes. Reloading ...");
           reloadPage && window.location.reload();
           break;
-
         case SIGN_LOG:
           console.info(payload);
+          break;
+        default:
           break;
       }
     });
@@ -125,6 +126,9 @@
 
         case SIGN_LOG:
           console.info(payload);
+          break;
+
+        default:
           break;
       }
     });

@@ -1,8 +1,8 @@
-// tslint:disable: no-console
 import { green, red, white, yellow } from "colors/safe";
 import { DEBUG, ERROR, INFO, LOG, WARN } from "../constants/log.constants";
 
 let logLevel;
+// eslint-disable-next-line no-return-assign
 export const setLogLevel = (level: LOG_LEVEL) => (logLevel = level);
 
 export const log = (message: string) => logLevel >= LOG && console.log(message);

@@ -2,7 +2,9 @@ import { Compilation, Compiler } from "webpack";
 
 export default class CompilerEventsFacade {
   public static extensionName = "webpack-extension-reloader";
+
   private _compiler: Compiler;
+
   private _legacyTapable: boolean;
 
   constructor(compiler: Compiler) {

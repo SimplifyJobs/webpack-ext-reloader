@@ -1,3 +1,4 @@
+/* eslint-disable no-prototype-builtins */
 import { assert } from "chai";
 import { stub } from "sinon";
 import { RawSource } from "webpack-sources";
