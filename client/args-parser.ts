@@ -1,3 +1,4 @@
+/* eslint-disable no-throw-literal */
 import { resolve } from "path";
 import { cwd } from "process";
 import { log } from "util";
@@ -29,7 +30,7 @@ export default (args: object) => {
   const optPath = resolve(cwd(), config);
 
   try {
-    // tslint:disable-next-line: no-eval
+    // eslint-disable-next-line no-eval
     const webpackConfig = eval("require")(optPath);
     return { webpackConfig, pluginOptions };
   } catch (err) {

@@ -5,7 +5,9 @@ import { REF_URL } from "../constants/reference-docs.constants";
 
 export default class Message {
   private referenceNumber: number;
+
   private type: LOG_INFO | LOG_WARN | LOG_ERROR;
+
   private message: string;
 
   constructor(type, referenceNumber, message) {
@@ -35,6 +37,8 @@ export default class Message {
         return "W";
       case ERROR:
         return "E";
+      default:
+        return "";
     }
   }
 }

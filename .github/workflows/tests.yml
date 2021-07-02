@@ -1,25 +1,38 @@
 name: tests
+
 on: [push]
+
 jobs:
   build-and-test:
     runs-on: ubuntu-latest
 
     steps:
-      - uses: actions/checkout@v1
-      - name: Cache NPM dependencies
-        id: npm-cache
-        uses: actions/cache@v1
+      - uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
         with:
-          path: ~/.cache/yarn
-          key: ${{ runner.os }}-yarn-${{ hashFiles(format('{0}{1}', github.workspace, '/yarn.lock')) }}
+          node-version: "14.x"
+
+      - name: Cache node modules
+        uses: actions/cache@v2
+        with:
+          path: node_modules
+          key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
-            ${{ runner.os }}-yarn-
+            ${{ runner.OS }}-build-${{ env.cache-name }}-
+            ${{ runner.OS }}-build-
+            ${{ runner.OS }}-
 
       - name: Install dependencies
-        run: yarn
+        run: npm ci
+        env:
+          CI: TRUE
 
       - name: Build plugin
-        run: yarn build
+        run: npm run build
 
       - name: Run the tests
-        run: yarn test
+        run: npm run test
+        env:
+          CI: TRUE

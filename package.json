@@ -1,26 +1,25 @@
 {
-  "name": "@legitatx/webpack-extension-reloader",
+  "name": "webpack-ext-reloader",
   "version": "1.1.6",
   "private": false,
-  "description": "Watch for changes and force the reload of the browser extension",
+  "description": "Watch for file changes and reload WebExtensions on browsers.",
   "main": "dist/webpack-extension-reloader.js",
   "bin": "./dist/webpack-extension-reloader-cli.js",
   "types": "typings/webpack-extension-reloader.d.ts",
   "repository": {
     "type": "git",
-    "url": "git://github.com/SimplifyJobs/webpack-extension-reloader.git"
+    "url": "git://github.com/SimplifyJobs/webpack-ext-reloader.git"
   },
   "husky": {
     "hooks": {
       "pre-commit": "lint-staged",
-      "pre-push": "yarn test"
+      "pre-push": "npm test"
     }
   },
   "lint-staged": {
     "*.{ts}": [
-      "yarn lint:files",
-      "yarn format:files",
-      "git add"
+      "npm run lint:files",
+      "npm run format:files"
     ]
   },
   "scripts": {
@@ -29,18 +28,18 @@
     "analyze": "NODE_ENV=production webpack --env.analyze",
     "start:dev": "NODE_ENV=development webpack --watch",
     "start:sample": "NODE_ENV=development webpack --config sample/webpack.plugin.js --watch",
-    "prepublishOnly": "yarn build",
-    "lint": "tslint \"{src,client,typings,specs}/**/*.ts\" --fix --format codeFrame",
+    "prepublishOnly": "npm build",
+    "lint": "eslint \"{src,client,typings,specs}/**/*.ts\" --fix --format codeframe",
     "format": "prettier --write \"{src,client,typings,specs}/**/*.ts\"",
-    "lint:files": "tslint --fix --format codeFrame",
+    "lint:files": "eslint --fix --format codeframe",
     "format:files": "prettier --write"
   },
   "author": "Rubens Pinheiro Gonçalves Cavalcante",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/SimplifyJobs/webpack-extension-reloader/issues"
+    "url": "https://github.com/SimplifyJobs/webpack-ext-reloader/issues"
   },
-  "homepage": "https://github.com/SimplifyJobs/webpack-extension-reloader#readme",
+  "homepage": "https://github.com/SimplifyJobs/webpack-ext-reloader#readme",
   "keywords": [
     "webpack",
     "plugin",
@@ -65,6 +64,7 @@
   },
   "devDependencies": {
     "@babel/core": "^7.14.6",
+    "@babel/eslint-parser": "^7.14.7",
     "@babel/plugin-proposal-class-properties": "^7.14.5",
     "@babel/plugin-proposal-logical-assignment-operators": "^7.14.5",
     "@babel/plugin-proposal-object-rest-spread": "^7.14.7",
@@ -80,11 +80,23 @@
     "@types/sinon": "^10.0.2",
     "@types/useragent": "^2.3.0",
     "@types/ws": "^7.4.5",
+    "@typescript-eslint/eslint-plugin": "^4.28.1",
+    "@typescript-eslint/parser": "^4.28.1",
     "autoprefixer": "^10.2.6",
     "babel-loader": "^8.2.2",
     "chai": "^4.3.4",
     "copy-webpack-plugin": "^8.1.1",
     "css-loader": "^5.2.6",
+    "eslint": "^7.29.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^8.3.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-plugin-import": "^2.23.4",
+    "eslint-plugin-jsx-a11y": "^6.4.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.4.0",
+    "eslint-plugin-react": "^7.24.0",
+    "eslint-plugin-react-hooks": "^4.2.0",
     "husky": "^6.0.0",
     "json-loader": "^0.5.7",
     "lint-staged": "^11.0.0",
@@ -96,8 +108,6 @@
     "source-map-support": "^0.5.19",
     "style-loader": "^3.0.0",
     "ts-loader": "^9.2.3",
-    "tslint": "^5.20.1",
-    "tslint-config-prettier": "^1.18.0",
     "typescript": "^4.3.4",
     "webpack": "5.36.2",
     "webpack-bundle-analyzer": "^4.4.2",

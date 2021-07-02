@@ -8,6 +8,5 @@ dist/tests.js.map
 .babelrc
 .gitignore
 tsconfig.json
-tslint.json
 webpack.config.js
 yarn.lock

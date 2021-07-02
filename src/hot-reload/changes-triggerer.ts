@@ -10,9 +10,7 @@ const changesTriggerer: TriggererFactory = (
   info("[ Starting the Hot Extension Reload Server... ]");
   server.listen();
 
-  return (onlyPageChanged: boolean): Promise<any> => {
-    return server.signChange(reloadPage, onlyPageChanged);
-  };
+  return (onlyPageChanged: boolean): Promise<any> => server.signChange(reloadPage, onlyPageChanged);
 };
 
 export default changesTriggerer;

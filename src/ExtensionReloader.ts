@@ -1,5 +1,5 @@
 import { merge } from "lodash";
-import { Compiler, Compilation, Chunk, Entry, version } from "webpack";
+import { Chunk, Compilation, Compiler, Entry, version } from "webpack";
 import { changesTriggerer } from "./hot-reload";
 import { onlyOnDevelopmentMsg } from "./messages/warnings";
 import { middlewareInjector } from "./middleware";
@@ -40,10 +40,11 @@ export default class ExtensionReloaderImpl extends AbstractPluginReloader
   ) {
     const changedChunks = [] as Chunk[];
 
+    // eslint-disable-next-line no-restricted-syntax
     for (const chunk of chunks) {
       const oldVersion = this._chunkVersions[chunk.name];
       this._chunkVersions[chunk.name] = chunk.hash;
-      if (chunk.hash !== oldVersion) changedChunks.push(chunk);
+      if (chunk.hash !== oldVersion) { changedChunks.push(chunk); }
     }
 
     const contentOrBgChanged = changedChunks.some(({ name }) => {
