@@ -33,6 +33,6 @@ jobs:
         run: npm run build
 
       - name: Run the tests
-        run: npm run test
+        run: npm test
         env:
           CI: TRUE
