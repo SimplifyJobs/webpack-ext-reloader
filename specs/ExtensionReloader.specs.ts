@@ -31,10 +31,8 @@ describe("ExtensionReloader", () => {
     it("Should check for --mode flag on versions >= 4", () => {
       const [plugin, stubbed] = pluginFactory("4.2.21");
       const mockedCompiler = { options: { mode: "development" } } as webpack.Compiler;
-
-      mockedCompiler.options.mode = "development";
       plugin.apply(mockedCompiler);
-      assert(registerStub.calledOnce);
+      assert(registerStub.called);
 
       stubbed.restore();
     });
