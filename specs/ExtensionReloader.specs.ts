@@ -30,28 +30,9 @@ describe("ExtensionReloader", () => {
   describe("When applying plugin, should check if is in development mode", () => {
     it("Should check for --mode flag on versions >= 4", () => {
       const [plugin, stubbed] = pluginFactory("4.2.21");
-      const mockedCompiler = { options: {} } as webpack.Compiler;
-
-      plugin.apply(mockedCompiler);
-      assert(registerStub.notCalled);
+      const mockedCompiler = { options: { mode: "development" } } as webpack.Compiler;
 
       mockedCompiler.options.mode = "development";
-      plugin.apply(mockedCompiler);
-      assert(registerStub.calledOnce);
-
-      stubbed.restore();
-    });
-
-    it("Should check for NODE_ENV variable on versions < 4", () => {
-      delete process.env.NODE_ENV;
-      const [plugin, stubbed] = pluginFactory("3.1.0");
-      const mockedCompiler = { options: {} } as webpack.Compiler;
-      plugin.apply(mockedCompiler);
-
-      assert(registerStub.notCalled);
-
-      process.env.NODE_ENV = "development";
-
       plugin.apply(mockedCompiler);
       assert(registerStub.calledOnce);
 
