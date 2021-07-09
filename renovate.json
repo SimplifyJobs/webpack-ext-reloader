@@ -1,6 +1,36 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "local>SimplifyJobs/renovate-config"
-  ]
+	"timezone": "America/Los_Angeles",
+	"schedule": [
+		"after 5pm every weekday",
+		"every weekend",
+		"before 9am every weekday"
+	],
+	"semanticCommits": "enabled",
+	"semanticCommitType": ":arrow_up:",
+	"semanticCommitScope": null,
+	"dependencyDashboard": true,
+	"dependencyDashboardTitle": "📁 Dependency Dashboard",
+	"labels": ["type: dependencies"],
+	"ignoreDeps": ["husky"],
+	"stabilityDays": 3,
+	"lockFileMaintenance": {
+		"enabled": true
+	},
+	"packageRules": [{
+			"matchUpdateTypes": ["lockFileMaintenance", "pin"],
+			"semanticCommitType": ":pushpin:"
+		},
+		{
+			"matchUpdateTypes": ["rollback"],
+			"semanticCommitType": ":arrow_down:"
+		},
+		{
+			"matchUpdateTypes": ["digest", "bump"],
+			"semanticCommitType": ":bookmark:"
+		},
+		{
+			"matchDepTypes": ["devDependencies"],
+			"automerge": true
+		}
+	]
 }
