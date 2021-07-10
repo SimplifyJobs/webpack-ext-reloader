@@ -30,7 +30,17 @@
 		},
 		{
 			"matchDepTypes": ["devDependencies"],
-			"automerge": true
+			"automerge": true,
+			"major": {
+				"automerge": false
+			}
+		},
+		{
+			"matchPackagePatterns": ["^@types/"],
+			"automerge": true,
+			"major": {
+				"automerge": false
+			}
 		}
 	]
 }
