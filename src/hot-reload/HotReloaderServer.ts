@@ -32,8 +32,7 @@ export default class HotReloaderServer {
   ): Promise<any> {
     if (this._signEmitter) {
       return this._signEmitter.safeSignChange(reloadPage, onlyPageChanged);
-    } 
-      return Promise.resolve(null);
-    
+    }
+    return Promise.resolve(null);
   }
 }

@@ -67,7 +67,7 @@ export default class SignEmitter {
   }
 
   private _sendMsg(msg: any) {
-    this._server.clients.forEach(client => {
+    this._server.clients.forEach((client) => {
       if (client.readyState === OPEN) {
         client.send(JSON.stringify(msg));
       }
