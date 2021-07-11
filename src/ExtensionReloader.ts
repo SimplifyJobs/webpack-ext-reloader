@@ -26,16 +26,6 @@ export default class ExtensionReloaderImpl
     this._chunkVersions = {};
   }
 
-  public _isWebpackGToEV4() {
-    if (version) {
-      const [major] = version.split(".");
-      if (parseInt(major, 10) >= 4) {
-        return true;
-      }
-    }
-    return false;
-  }
-
   public _whatChanged(
     chunks: Compilation["chunks"],
     { background, contentScript, extensionPage }: IEntriesOption,
@@ -120,11 +110,7 @@ export default class ExtensionReloaderImpl
   }
 
   public apply(compiler: Compiler) {
-    if (
-      (this._isWebpackGToEV4()
-        ? compiler.options.mode
-        : process.env.NODE_ENV) === "development"
-    ) {
+    if (compiler.options.mode === "development") {
       this._registerPlugin(compiler);
     } else {
       warn(onlyOnDevelopmentMsg.get());

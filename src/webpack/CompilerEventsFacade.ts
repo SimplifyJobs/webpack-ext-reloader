@@ -10,18 +10,28 @@ export default class CompilerEventsFacade {
   }
 
   public afterOptimizeChunkAssets(
-    call: (compilation: Compilation, assets: Compilation["assets"]) => void,
+    call: (compilation: Compilation, chunks: Compilation["chunks"]) => void,
   ) {
     return this._compiler.hooks.compilation.tap(
       CompilerEventsFacade.extensionName,
-      (comp) =>
-        comp.hooks.processAssets.tap(
-          {
-            name: CompilerEventsFacade.extensionName,
-            stage: Compilation.PROCESS_ASSETS_STAGE_OPTIMIZE,
-          },
-          (assets) => call(comp, assets),
-        ),
+      (comp) => {
+        const afterOptimizeChunkAssets = (chunks) => {
+          call(comp, chunks);
+        };
+        /* https://github.com/webpack/webpack/blob/main/lib/Compilation.js#L772-L779
+        afterOptimizeChunkAssets = PROCESS_ASSETS_STAGE_OPTIMIZE + 1
+        afterOptimizeChunkAssets = 101
+        */
+        const stage = 101;
+        (comp.hooks as any).processAssets.tap(
+          { name: CompilerEventsFacade.extensionName, stage },
+          afterOptimizeChunkAssets,
+        );
+        comp.hooks.afterOptimizeChunkAssets.tap(
+          CompilerEventsFacade.extensionName,
+          (chunks) => call(comp, chunks),
+        );
+      },
     );
   }
 
