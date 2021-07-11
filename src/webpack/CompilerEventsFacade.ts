@@ -27,10 +27,6 @@ export default class CompilerEventsFacade {
           { name: CompilerEventsFacade.extensionName, stage },
           afterOptimizeChunkAssets,
         );
-        comp.hooks.afterOptimizeChunkAssets.tap(
-          CompilerEventsFacade.extensionName,
-          (chunks) => call(comp, chunks),
-        );
       },
     );
   }
