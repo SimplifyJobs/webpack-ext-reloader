@@ -14,8 +14,10 @@ import {
   IPluginOptions,
 } from "../typings/webpack-extension-reloader";
 
-export default class ExtensionReloaderImpl extends AbstractPluginReloader
-  implements IExtensionReloaderInstance {
+export default class ExtensionReloaderImpl
+  extends AbstractPluginReloader
+  implements IExtensionReloaderInstance
+{
   private _opts?: IPluginOptions;
 
   constructor(options?: IPluginOptions) {
@@ -44,7 +46,9 @@ export default class ExtensionReloaderImpl extends AbstractPluginReloader
     for (const chunk of chunks) {
       const oldVersion = this._chunkVersions[chunk.name];
       this._chunkVersions[chunk.name] = chunk.hash;
-      if (chunk.hash !== oldVersion) { changedChunks.push(chunk); }
+      if (chunk.hash !== oldVersion) {
+        changedChunks.push(chunk);
+      }
     }
 
     const contentOrBgChanged = changedChunks.some(({ name }) => {
@@ -52,7 +56,7 @@ export default class ExtensionReloaderImpl extends AbstractPluginReloader
       const bgChanged = name === background;
 
       if (Array.isArray(contentScript)) {
-        contentChanged = contentScript.some(script => script === name);
+        contentChanged = contentScript.some((script) => script === name);
       } else {
         contentChanged = name === contentScript;
       }
@@ -67,7 +71,7 @@ export default class ExtensionReloaderImpl extends AbstractPluginReloader
         let pageChanged = false;
 
         if (Array.isArray(extensionPage)) {
-          pageChanged = extensionPage.some(script => script === name);
+          pageChanged = extensionPage.some((script) => script === name);
         } else {
           pageChanged = name === extensionPage;
         }
@@ -96,14 +100,14 @@ export default class ExtensionReloaderImpl extends AbstractPluginReloader
     this._eventAPI = new CompilerEventsFacade(compiler);
     this._injector = middlewareInjector(parsedEntries, { port, reloadPage });
     this._triggerer = changesTriggerer(port, reloadPage);
-    this._eventAPI.afterOptimizeChunkAssets((comp, chunks) => {
+    this._eventAPI.afterOptimizeChunks((comp, chunks) => {
       comp.assets = {
         ...comp.assets,
         ...this._injector(comp.assets, chunks),
       };
     });
 
-    this._eventAPI.afterEmit(comp => {
+    this._eventAPI.afterEmit((comp) => {
       const { contentOrBgChanged, onlyPageChanged } = this._whatChanged(
         comp.chunks,
         parsedEntries,
