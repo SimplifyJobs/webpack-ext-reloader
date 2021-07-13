@@ -26,6 +26,16 @@ export default class ExtensionReloaderImpl
     this._chunkVersions = {};
   }
 
+  public _isWebpackGToEV4() {
+    if (version) {
+      const [major] = version.split(".");
+      if (parseInt(major, 10) >= 4) {
+        return true;
+      }
+    }
+    return false;
+  }
+
   public _whatChanged(
     chunks: Compilation["chunks"],
     { background, contentScript, extensionPage }: IEntriesOption,
@@ -90,7 +100,7 @@ export default class ExtensionReloaderImpl
     this._eventAPI = new CompilerEventsFacade(compiler);
     this._injector = middlewareInjector(parsedEntries, { port, reloadPage });
     this._triggerer = changesTriggerer(port, reloadPage);
-    this._eventAPI.afterOptimizeChunkAssets((comp, chunks) => {
+    this._eventAPI.afterOptimizeChunks((comp, chunks) => {
       comp.assets = {
         ...comp.assets,
         ...this._injector(comp.assets, chunks),
@@ -110,7 +120,11 @@ export default class ExtensionReloaderImpl
   }
 
   public apply(compiler: Compiler) {
-    if (compiler.options.mode === "development") {
+    if (
+      (this._isWebpackGToEV4()
+        ? compiler.options.mode
+        : process.env.NODE_ENV) === "development"
+    ) {
       this._registerPlugin(compiler);
     } else {
       warn(onlyOnDevelopmentMsg.get());
