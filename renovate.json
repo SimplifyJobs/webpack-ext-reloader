@@ -10,8 +10,7 @@
     ":updateNotScheduled",
     ":autodetectPinVersions",
     ":prConcurrentLimit20",
-    "workarounds:all",
-    ":pinOnlyDevDependencies"
+    "workarounds:all"
   ],
   "timezone": "America/Los_Angeles",
   "schedule": [
@@ -28,11 +27,10 @@
   "labels": ["type: dependencies"],
   "ignoreDeps": ["husky"],
   "stabilityDays": 3,
+  "lockFileMaintenance": { "enabled": true, "automerge": true },
   "packageRules": [
     {
       "matchUpdateTypes": ["lockFileMaintenance"],
-      "enabled": true,
-      "automerge": true,
       "addLabels": ["type: maintenance"]
     },
     {
@@ -48,7 +46,7 @@
       "semanticCommitType": ":bookmark:"
     },
     {
-      "matchDepTypes": ["devDependencies"],
+      "matchDepTypes": ["devDependencies", "dev-dependencies"],
       "automerge": true,
       "major": {
         "automerge": false

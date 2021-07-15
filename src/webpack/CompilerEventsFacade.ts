@@ -18,7 +18,7 @@ export default class CompilerEventsFacade {
         const afterOptimizeChunkAssets = (chunks) => {
           call(comp, chunks);
         };
-        (comp.hooks as any).processAssets.tap(
+        comp.hooks.processAssets.tap(
           {
             name: CompilerEventsFacade.extensionName,
             stage: Compilation.PROCESS_ASSETS_STAGE_ANALYSE,
