@@ -1,4 +1,4 @@
-import { Compilation, Compiler } from "webpack";
+import { Chunk, Compilation, Compiler } from "webpack";
 
 export default class CompilerEventsFacade {
   public static extensionName = "webpack-extension-reloader";
@@ -15,6 +15,7 @@ export default class CompilerEventsFacade {
     return this._compiler.hooks.compilation.tap(
       CompilerEventsFacade.extensionName,
       (comp) => {
+        const chunks: Set<Chunk> = new Set();
         const afterOptimizeChunkAssets = (chunks) => {
           call(comp, chunks);
         };
@@ -23,7 +24,12 @@ export default class CompilerEventsFacade {
             name: CompilerEventsFacade.extensionName,
             stage: Compilation.PROCESS_ASSETS_STAGE_ANALYSE,
           },
-          afterOptimizeChunkAssets,
+          () => {
+            comp.chunks.forEach((chunk) => {
+              chunks.add(chunk);
+            });
+            afterOptimizeChunkAssets(chunks);
+          },
         );
       },
     );
