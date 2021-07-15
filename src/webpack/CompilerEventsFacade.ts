@@ -15,9 +15,9 @@ export default class CompilerEventsFacade {
     return this._compiler.hooks.compilation.tap(
       CompilerEventsFacade.extensionName,
       (comp) => {
-        const chunks: Set<Chunk> = new Set();
-        const afterOptimizeChunkAssets = (chunks) => {
-          call(comp, chunks);
+        const chunks = new Set();
+        const afterOptimizeChunkAssets = (chunksAfterOptimization) => {
+          call(comp, chunksAfterOptimization);
         };
         comp.hooks.processAssets.tap(
           {
