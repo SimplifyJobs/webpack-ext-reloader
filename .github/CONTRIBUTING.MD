@@ -50,13 +50,13 @@ Inside this repository have an example plugin, so you can test and see it workin
 After cloning the repository, run:
 
 ```bash
-yarn build
+npm run build
 ```
 
  And then run:
 
  ```bash
- yarn start:sample
+ npm run start:sample
  ```
 
  This will make the webpack run in watch mode for the sample plugin source and output the built files on the "dist"
