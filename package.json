@@ -28,7 +28,7 @@
     "analyze": "NODE_ENV=production webpack --env.analyze",
     "start:dev": "NODE_ENV=development webpack --watch",
     "start:sample": "NODE_ENV=development webpack --config sample/webpack.plugin.js --watch",
-    "prepublishOnly": "npm build",
+    "prepublishOnly": "npm run build",
     "lint": "eslint \"{src,client,typings,specs}/**/*.ts\" --fix --format codeframe",
     "format": "prettier --write \"{src,client,typings,specs}/**/*.ts\"",
     "lint:files": "eslint --fix --format codeframe",
