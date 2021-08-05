@@ -74,7 +74,7 @@
     "@babel/preset-env": "7.14.9",
     "@types/chai": "4.2.21",
     "@types/colors": "1.2.1",
-    "@types/lodash": "4.14.171",
+    "@types/lodash": "4.14.172",
     "@types/minimist": "1.2.2",
     "@types/mocha": "8.2.3",
     "@types/sinon": "10.0.2",
