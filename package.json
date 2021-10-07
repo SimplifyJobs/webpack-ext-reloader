@@ -50,13 +50,13 @@
   ],
   "dependencies": {
     "@types/webpack": "^5.28.0",
-    "@types/webpack-sources": "^2.1.0",
+    "@types/webpack-sources": "^3.0.0",
     "colors": "^1.4.0",
     "lodash": "^4.17.21",
     "minimist": "^1.2.5",
     "useragent": "^2.3.0",
     "webextension-polyfill": "^0.8.0",
-    "webpack-sources": "^2.3.0",
+    "webpack-sources": "^3.0.0",
     "ws": "^7.5.1"
   },
   "peerDependencies": {
