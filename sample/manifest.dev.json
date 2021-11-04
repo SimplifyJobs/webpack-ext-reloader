@@ -3,9 +3,7 @@
   "name": "[DEVELOPMENT] Webpack Chrome Extension Reloader Sample",
   "version": "0.1",
   "background": {
-    "scripts": [
-      "background.bundle.js"
-    ]
+    "scripts": ["background.bundle.js"]
   },
   "icons": {
     "16": "webpack.16.png",
@@ -17,15 +15,9 @@
   },
   "content_scripts": [
     {
-      "matches": [
-        "<all_urls>"
-      ],
-      "js": [
-        "content-script.bundle.js"
-      ],
-      "css": [
-        "style.css"
-      ]
+      "matches": ["<all_urls>"],
+      "js": ["content-script.bundle.js"],
+      "css": ["style.css"]
     }
   ]
 }

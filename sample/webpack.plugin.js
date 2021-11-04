@@ -40,10 +40,7 @@ module.exports = {
           /* If you have different configurations for development and production,*/
           /* you can have two manifests (one for each environment)               */
           /***********************************************************************/
-          from:
-            process.env.NODE_ENV === "development"
-              ? "./sample/manifest.dev.json"
-              : "./sample/manifest.prod.json",
+          from: process.env.NODE_ENV === "development" ? "./sample/manifest.dev.json" : "./sample/manifest.prod.json",
           to: "manifest.json",
         },
         { from: "./sample/plugin-src/popup.html" },

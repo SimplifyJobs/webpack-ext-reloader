@@ -40,9 +40,7 @@ describe("SignEmitter", () => {
     const emitter = new SignEmitter(mockedServer, mockedAgent as Agent);
 
     assert(debounceSpy.calledWith(FAST_RELOAD_DEBOUNCING_FRAME));
-    assert(
-      fastReloadBlockerSpy.calledWith(FAST_RELOAD_CALLS, FAST_RELOAD_WAIT),
-    );
+    assert(fastReloadBlockerSpy.calledWith(FAST_RELOAD_CALLS, FAST_RELOAD_WAIT));
   });
 
   it(`Should assign new rules if the Chrome/Chromium version is >= ${NEW_FAST_RELOAD_CHROME_VERSION}`, () => {
@@ -55,8 +53,6 @@ describe("SignEmitter", () => {
     } as Agent);
 
     assert(debounceSpy.calledWith(NEW_FAST_RELOAD_DEBOUNCING_FRAME));
-    assert(
-      fastReloadBlockerSpy.calledWith(NEW_FAST_RELOAD_CALLS, FAST_RELOAD_WAIT),
-    );
+    assert(fastReloadBlockerSpy.calledWith(NEW_FAST_RELOAD_CALLS, FAST_RELOAD_WAIT));
   });
 });

@@ -41,22 +41,14 @@ export default class SignEmitter {
     }
   }
 
-  public safeSignChange(
-    reloadPage: boolean,
-    onlyPageChanged: boolean,
-  ): Promise<any> {
+  public safeSignChange(reloadPage: boolean, onlyPageChanged: boolean): Promise<any> {
     return new Promise((res, rej) => {
       this._safeSignChange(reloadPage, onlyPageChanged, res, rej);
     });
   }
 
   private _setupSafeSignChange() {
-    return (
-      reloadPage: boolean,
-      onlyPageChanged: boolean,
-      onSuccess: () => void,
-      onError: (err: Error) => void,
-    ) => {
+    return (reloadPage: boolean, onlyPageChanged: boolean, onSuccess: () => void, onError: (err: Error) => void) => {
       try {
         this._sendMsg(signChange({ reloadPage, onlyPageChanged }));
         onSuccess();
@@ -74,10 +66,7 @@ export default class SignEmitter {
     });
   }
 
-  private _satisfies(
-    browserVersion: BrowserVersion,
-    targetVersion: BrowserVersion,
-  ) {
+  private _satisfies(browserVersion: BrowserVersion, targetVersion: BrowserVersion) {
     const versionPairs: VersionPair[] = zip(browserVersion, targetVersion);
 
     // eslint-disable-next-line no-restricted-syntax

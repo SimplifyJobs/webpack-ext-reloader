@@ -17,19 +17,14 @@ export default class HotReloaderServer {
       const userAgent = parse(msg.headers["user-agent"]);
       this._signEmitter = new SignEmitter(this._server, userAgent);
 
-      ws.on("message", (data: string) =>
-        info(`Message from ${userAgent.family}: ${JSON.parse(data).payload}`),
-      );
+      ws.on("message", (data: string) => info(`Message from ${userAgent.family}: ${JSON.parse(data).payload}`));
       ws.on("error", () => {
         // NOOP - swallow socket errors due to http://git.io/vbhSN
       });
     });
   }
 
-  public signChange(
-    reloadPage: boolean,
-    onlyPageChanged: boolean,
-  ): Promise<any> {
+  public signChange(reloadPage: boolean, onlyPageChanged: boolean): Promise<any> {
     if (this._signEmitter) {
       return this._signEmitter.safeSignChange(reloadPage, onlyPageChanged);
     }

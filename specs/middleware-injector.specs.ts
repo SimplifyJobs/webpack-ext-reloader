@@ -12,9 +12,7 @@ describe("middleware-injector", () => {
   let singleContentChunks;
   const sourceCode = "console.log('I am a middleware!!!');";
 
-  stub(middlewareSourceBuilder, "default").callsFake(
-    opts => new RawSource(sourceCode),
-  );
+  stub(middlewareSourceBuilder, "default").callsFake((opts) => new RawSource(sourceCode));
 
   const sourceFactory = stub().callsFake((toConcat: string, file) => ({
     source: () => toConcat + file.source(),
@@ -50,14 +48,8 @@ describe("middleware-injector", () => {
 
   const options2: IEntriesOption = {
     background: entriesInfo.background.name,
-    contentScript: [
-      entriesInfo.contentScript.name,
-      entriesInfo.extraContentScript.name,
-    ],
-    extensionPage: [
-      entriesInfo.extensionPage.name,
-      entriesInfo.extraExtensionPage.name,
-    ],
+    contentScript: [entriesInfo.contentScript.name, entriesInfo.extraContentScript.name],
+    extensionPage: [entriesInfo.extensionPage.name, entriesInfo.extraExtensionPage.name],
   };
 
   const fakeCssPath = "./path/to/some.css";
@@ -136,9 +128,7 @@ describe("middleware-injector", () => {
     });
 
     it("Should inject into the background script", () => {
-      const newBgSource = assetsSingleContent[
-        entriesInfo.background.path
-      ].source();
+      const newBgSource = assetsSingleContent[entriesInfo.background.path].source();
       const oldBgSource = assets[entriesInfo.background.path].source();
 
       assert.include(newBgSource, oldBgSource);
@@ -146,64 +136,44 @@ describe("middleware-injector", () => {
     });
 
     it("Should inject into a single contentScript", () => {
-      const newContentSource = assetsSingleContent[
-        entriesInfo.contentScript.path
-      ].source();
+      const newContentSource = assetsSingleContent[entriesInfo.contentScript.path].source();
       const oldContentSource = assets[entriesInfo.contentScript.path].source();
       assert.include(newContentSource, oldContentSource);
       assert.include(newContentSource, sourceCode);
     });
 
     it("Should inject into the multiple contentScripts", () => {
-      const newFirstContentSource = assetsMultiContent[
-        entriesInfo.contentScript.path
-      ].source();
-      const oldFirstContentSource = assets[
-        entriesInfo.contentScript.path
-      ].source();
+      const newFirstContentSource = assetsMultiContent[entriesInfo.contentScript.path].source();
+      const oldFirstContentSource = assets[entriesInfo.contentScript.path].source();
 
       assert.include(newFirstContentSource, oldFirstContentSource);
       assert.include(newFirstContentSource, sourceCode);
 
-      const newSecondContentSource = assetsMultiContent[
-        entriesInfo.extraContentScript.path
-      ].source();
+      const newSecondContentSource = assetsMultiContent[entriesInfo.extraContentScript.path].source();
 
-      const oldSecondContentSource = assets[
-        entriesInfo.extraContentScript.path
-      ].source();
+      const oldSecondContentSource = assets[entriesInfo.extraContentScript.path].source();
 
       assert.include(newSecondContentSource, oldSecondContentSource);
       assert.include(newSecondContentSource, sourceCode);
     });
 
     it("Should inject into a single extensionPage", () => {
-      const newContentSource = assetsSingleContent[
-        entriesInfo.extensionPage.path
-      ].source();
+      const newContentSource = assetsSingleContent[entriesInfo.extensionPage.path].source();
       const oldContentSource = assets[entriesInfo.extensionPage.path].source();
       assert.include(newContentSource, oldContentSource);
       assert.include(newContentSource, sourceCode);
     });
 
     it("Should inject into the multiple extensionPages", () => {
-      const newFirstContentSource = assetsMultiContent[
-        entriesInfo.extensionPage.path
-      ].source();
-      const oldFirstContentSource = assets[
-        entriesInfo.extensionPage.path
-      ].source();
+      const newFirstContentSource = assetsMultiContent[entriesInfo.extensionPage.path].source();
+      const oldFirstContentSource = assets[entriesInfo.extensionPage.path].source();
 
       assert.include(newFirstContentSource, oldFirstContentSource);
       assert.include(newFirstContentSource, sourceCode);
 
-      const newSecondContentSource = assetsMultiContent[
-        entriesInfo.extraExtensionPage.path
-      ].source();
+      const newSecondContentSource = assetsMultiContent[entriesInfo.extraExtensionPage.path].source();
 
-      const oldSecondContentSource = assets[
-        entriesInfo.extraExtensionPage.path
-      ].source();
+      const oldSecondContentSource = assets[entriesInfo.extraExtensionPage.path].source();
 
       assert.include(newSecondContentSource, oldSecondContentSource);
       assert.include(newSecondContentSource, sourceCode);

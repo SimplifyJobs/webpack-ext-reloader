@@ -9,15 +9,9 @@ import { extractEntries } from "./utils/manifest";
 import AbstractPluginReloader from "./webpack/AbstractExtensionReloader";
 import CompilerEventsFacade from "./webpack/CompilerEventsFacade";
 
-import {
-  IExtensionReloaderInstance,
-  IPluginOptions,
-} from "../typings/webpack-extension-reloader";
+import { IExtensionReloaderInstance, IPluginOptions } from "../typings/webpack-extension-reloader";
 
-export default class ExtensionReloaderImpl
-  extends AbstractPluginReloader
-  implements IExtensionReloaderInstance
-{
+export default class ExtensionReloaderImpl extends AbstractPluginReloader implements IExtensionReloaderInstance {
   private _opts?: IPluginOptions;
 
   constructor(options?: IPluginOptions) {
@@ -36,10 +30,7 @@ export default class ExtensionReloaderImpl
     return false;
   }
 
-  public _whatChanged(
-    chunks: Compilation["chunks"],
-    { background, contentScript, extensionPage }: IEntriesOption,
-  ) {
+  public _whatChanged(chunks: Compilation["chunks"], { background, contentScript, extensionPage }: IEntriesOption) {
     const changedChunks = [] as Chunk[];
 
     // eslint-disable-next-line no-restricted-syntax
@@ -84,10 +75,7 @@ export default class ExtensionReloaderImpl
   }
 
   public _registerPlugin(compiler: Compiler) {
-    const { reloadPage, port, entries, manifest } = merge(
-      defaultOptions,
-      this._opts,
-    );
+    const { reloadPage, port, entries, manifest } = merge(defaultOptions, this._opts);
 
     const parsedEntries: IEntriesOption = manifest
       ? extractEntries(
@@ -108,10 +96,7 @@ export default class ExtensionReloaderImpl
     });
 
     this._eventAPI.afterEmit((comp) => {
-      const { contentOrBgChanged, onlyPageChanged } = this._whatChanged(
-        comp.chunks,
-        parsedEntries,
-      );
+      const { contentOrBgChanged, onlyPageChanged } = this._whatChanged(comp.chunks, parsedEntries);
 
       if (contentOrBgChanged || onlyPageChanged) {
         this._triggerer(onlyPageChanged);
@@ -120,11 +105,7 @@ export default class ExtensionReloaderImpl
   }
 
   public apply(compiler: Compiler) {
-    if (
-      (this._isWebpackGToEV4()
-        ? compiler.options.mode
-        : process.env.NODE_ENV) === "development"
-    ) {
+    if ((this._isWebpackGToEV4() ? compiler.options.mode : process.env.NODE_ENV) === "development") {
       this._registerPlugin(compiler);
     } else {
       warn(onlyOnDevelopmentMsg.get());

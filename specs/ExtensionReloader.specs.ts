@@ -7,10 +7,7 @@ import { IExtensionReloaderInstance } from "../typings/webpack-extension-reloade
 describe("ExtensionReloader", () => {
   const envCopy = { ...process.env };
 
-  const registerStub = stub(
-    ExtensionReloaderImpl.prototype,
-    "_registerPlugin",
-  ).returns();
+  const registerStub = stub(ExtensionReloaderImpl.prototype, "_registerPlugin").returns();
 
   function pluginFactory(): IExtensionReloaderInstance {
     const plugin = new ExtensionReloaderImpl();

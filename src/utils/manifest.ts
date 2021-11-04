@@ -1,19 +1,14 @@
 import { readFileSync } from "fs";
 import { flatMapDeep } from "lodash";
 import { Compiler, Entry } from "webpack";
-import {
-  bgScriptEntryErrorMsg,
-  bgScriptManifestRequiredMsg,
-} from "../messages/errors";
+import { bgScriptEntryErrorMsg, bgScriptManifestRequiredMsg } from "../messages/errors";
 
 export function extractEntries(
   webpackEntry: Entry,
   webpackOutput: Compiler["options"]["output"] = {},
   manifestPath: string,
 ): IEntriesOption {
-  const manifestJson = JSON.parse(
-    readFileSync(manifestPath).toString(),
-  ) as IExtensionManifest;
+  const manifestJson = JSON.parse(readFileSync(manifestPath).toString()) as IExtensionManifest;
   const { background, content_scripts } = manifestJson;
   const { filename } = webpackOutput;
 
@@ -29,9 +24,7 @@ export function extractEntries(
   const toRemove = (filename as string).replace("[name]", "");
 
   const bgWebpackEntry = Object.keys(webpackEntry).find((entryName) =>
-    bgScriptFileNames.some(
-      (bgManifest) => bgManifest.replace(toRemove, "") === entryName,
-    ),
+    bgScriptFileNames.some((bgManifest) => bgManifest.replace(toRemove, "") === entryName),
   );
 
   if (!bgWebpackEntry) {
@@ -41,9 +34,7 @@ export function extractEntries(
   const contentEntries: unknown = content_scripts
     ? flatMapDeep(Object.keys(webpackEntry), (entryName) =>
         content_scripts.map(({ js }) =>
-          js
-            .map((contentItem) => contentItem.replace(toRemove, ""))
-            .filter((contentItem) => contentItem === entryName),
+          js.map((contentItem) => contentItem.replace(toRemove, "")).filter((contentItem) => contentItem === entryName),
         ),
       )
     : null;
