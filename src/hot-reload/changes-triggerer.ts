@@ -4,7 +4,7 @@ import HotReloaderServer from "./HotReloaderServer";
 const changesTriggerer: TriggererFactory = (port: number, reloadPage: boolean) => {
   const server = new HotReloaderServer(port);
 
-  info("[ Starting the Hot Extension Reload Server... ]");
+  info("[ Starting the Web Extension Hot Reload Server... ]");
   server.listen();
 
   return (onlyPageChanged: boolean): Promise<any> => server.signChange(reloadPage, onlyPageChanged);

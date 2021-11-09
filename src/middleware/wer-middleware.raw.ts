@@ -61,7 +61,7 @@
   function backgroundWorker(socket: WebSocket) {
     runtime.onMessage.addListener((action: { type: string; payload: any }, sender) => {
       if (action.type === SIGN_CONNECT) {
-        return Promise.resolve(formatter("Connected to Extension Hot Reloader"));
+        return Promise.resolve(formatter("Connected to Web Extension Hot Reloader"));
       }
       return true;
     });
