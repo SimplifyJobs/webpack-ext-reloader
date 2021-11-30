@@ -7,7 +7,7 @@ const changesTriggerer: TriggererFactory = (
 ) => {
   const server = new HotReloaderServer(port);
 
-  info("[ Starting the Hot Extension Reload Server... ]");
+  info("[ Starting the Extension Hot Reload Server... ]");
   server.listen();
 
   return (onlyPageChanged: boolean): Promise<any> =>
