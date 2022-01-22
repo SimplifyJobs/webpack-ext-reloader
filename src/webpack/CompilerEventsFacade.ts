@@ -1,4 +1,4 @@
-import { Chunk, Compilation, Compiler } from "webpack";
+import { Compilation, Compiler } from "webpack";
 
 export default class CompilerEventsFacade {
   public static extensionName = "webpack-extension-reloader";

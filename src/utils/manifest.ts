@@ -5,8 +5,8 @@ import { bgScriptEntryErrorMsg, bgScriptManifestRequiredMsg } from "../messages/
 
 export function extractEntries(
   webpackEntry: Entry,
-  webpackOutput: Compiler["options"]["output"] = {},
   manifestPath: string,
+  webpackOutput: Compiler["options"]["output"] = {},
 ): IEntriesOption {
   const manifestJson = JSON.parse(readFileSync(manifestPath).toString()) as IExtensionManifest;
   const { background, content_scripts } = manifestJson;
