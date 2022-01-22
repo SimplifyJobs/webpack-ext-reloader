@@ -18,7 +18,6 @@ const middlewareInjector: MiddlewareInjector = ({ background, contentScript, ext
     Array.from(chunks).reduce((prev, { name, files }) => {
       if (matchBgOrContentOrPage(name)) {
         files.forEach((entryPoint) => {
-          console.log(`Entry point: ${entryPoint}`);
           if (/\.js$/.test(entryPoint)) {
             const finalSrc = sourceFactory(source, assets[entryPoint]);
             prev[entryPoint] = finalSrc;
