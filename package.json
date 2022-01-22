@@ -70,10 +70,8 @@
     "@babel/plugin-proposal-object-rest-spread": "7.16.7",
     "@babel/plugin-syntax-dynamic-import": "7.8.3",
     "@babel/plugin-transform-regenerator": "7.16.7",
-    "@babel/polyfill": "7.12.1",
     "@babel/preset-env": "7.16.11",
     "@types/chai": "4.3.0",
-    "@types/colors": "1.2.1",
     "@types/lodash": "4.14.178",
     "@types/minimist": "1.2.2",
     "@types/mocha": "9.1.0",
@@ -112,5 +110,10 @@
     "webpack": "5.67.0",
     "webpack-bundle-analyzer": "4.5.0",
     "webpack-cli": "4.9.1"
+  },
+  "overrides": {
+    "mocha": {
+      "nanoid": "3.1.32"
+    }
   }
 }
