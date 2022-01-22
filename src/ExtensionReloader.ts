@@ -80,8 +80,8 @@ export default class ExtensionReloaderImpl extends AbstractPluginReloader implem
     const parsedEntries: IEntriesOption = manifest
       ? extractEntries(
           compiler.options.entry as Entry,
-          compiler.options.output as Compiler["options"]["output"],
           manifest,
+          compiler.options.output as Compiler["options"]["output"],
         )
       : entries;
 
