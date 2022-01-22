@@ -82,7 +82,7 @@
     "@types/ws": "8.2.0",
     "@typescript-eslint/eslint-plugin": "5.3.0",
     "@typescript-eslint/parser": "5.3.0",
-    "autoprefixer": "10.4.0",
+    "autoprefixer": "10.4.2",
     "babel-loader": "8.2.3",
     "chai": "4.3.4",
     "copy-webpack-plugin": "9.0.1",
