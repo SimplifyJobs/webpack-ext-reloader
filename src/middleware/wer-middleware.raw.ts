@@ -39,7 +39,6 @@
 
   // ========================== Called only on content scripts ============================== //
   function contentScriptWorker() {
-    console.log('contentScriptWorker')
     runtime.sendMessage({ type: SIGN_CONNECT }).then(msg => console.info(msg));
 
     runtime.onMessage.addListener(({ type, payload }: { type: string; payload: any }) => {
