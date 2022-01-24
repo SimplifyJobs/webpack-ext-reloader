@@ -5,7 +5,7 @@ const pack = require("./package.json");
 const { isDevelopment, isProduction, test } = require("./src/utils/env");
 
 const mode = isDevelopment ? "development" : "production";
-const packName = "webpack-extension-reloader";
+const packName = "webpack-ext-reloader";
 
 module.exports = (env = { analyze: false }) => ({
   mode,
@@ -27,7 +27,7 @@ module.exports = (env = { analyze: false }) => ({
       banner: `/// <reference path="../typings/${packName}.d.ts" />`,
       raw: true,
       entryOnly: true,
-      include: "webpack-extension-reloader",
+      include: "webpack-ext-reloader",
     }),
     new BannerPlugin({
       banner: "#!/usr/bin/env node",
@@ -36,11 +36,7 @@ module.exports = (env = { analyze: false }) => ({
       include: `${packName}-cli`,
     }),
   ].filter((plugin) => !!plugin),
-  externals: [
-    ...Object.keys(pack.dependencies),
-    "webpack",
-    "webpack-extension-reloader",
-  ],
+  externals: [...Object.keys(pack.dependencies), "webpack", "webpack-ext-reloader"],
   resolve: {
     modules: [path.resolve(__dirname, "src"), "node_modules"],
     mainFiles: ["index"],
