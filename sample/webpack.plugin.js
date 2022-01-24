@@ -1,33 +1,40 @@
-const { resolve } = require("path");
+const path = require("path");
 const CopyWebpackPlugin = require("copy-webpack-plugin");
+const { CleanWebpackPlugin } = require("clean-webpack-plugin");
 const MiniCssExtractPlugin = require("mini-css-extract-plugin");
-const ExtensionReloaderPlugin = require("../dist/webpack-extension-reloader");
+const ExtensionReloaderPlugin = require("../dist/webpack-ext-reloader");
 
 const mode = process.env.NODE_ENV;
+const targetBrowser = process.env.TARGET_BROWSER;
+
 module.exports = {
   mode,
   devtool: "inline-source-map",
   entry: {
-    "content-script": "./sample/plugin-src/my-content-script.js",
-    background: "./sample/plugin-src/my-background.js",
-    popup: "./sample/plugin-src/popup.js",
+    "content-script": "./sample/src/my-content-script.js",
+    background: "./sample/src/my-background.js",
+    popup: "./sample/src/popup.js",
   },
   output: {
     publicPath: ".",
-    path: resolve(__dirname, "dist/"),
+    path: path.resolve(__dirname, "dist/", targetBrowser),
     filename: "[name].bundle.js",
     libraryTarget: "umd",
   },
   plugins: [
-    /***********************************************************************/
-    /* By default the plugin will work only when NODE_ENV is "development" */
-    /***********************************************************************/
+    new CleanWebpackPlugin({
+      cleanOnceBeforeBuildPatterns: [path.join(process.cwd(), path.resolve(__dirname, "dist/", targetBrowser))],
+      cleanStaleWebpackAssets: false,
+      verbose: true,
+    }),
     new ExtensionReloaderPlugin({
       entries: {
         contentScript: "content-script",
         background: "background",
         extensionPage: "popup",
       },
+      port: targetBrowser === "chrome" ? 9090 : 9091,
+      reloadPage: false, // can also be true!
       // Also possible to use
       // manifest: resolve(__dirname, "manifest.json")
     }),
@@ -35,15 +42,9 @@ module.exports = {
     new MiniCssExtractPlugin({ filename: "style.css" }),
     new CopyWebpackPlugin({
       patterns: [
-        {
-          /***********************************************************************/
-          /* If you have different configurations for development and production,*/
-          /* you can have two manifests (one for each environment)               */
-          /***********************************************************************/
-          from: process.env.NODE_ENV === "development" ? "./sample/manifest.dev.json" : "./sample/manifest.prod.json",
-          to: "manifest.json",
-        },
-        { from: "./sample/plugin-src/popup.html" },
+        { from: "./sample/manifest.json" },
+        { from: "./sample/src/some-asset.txt" },
+        { from: "./sample/src/popup.html" },
         { from: "./sample/icons" },
       ],
     }),

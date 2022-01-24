@@ -1,6 +1,6 @@
 {
   "manifest_version": 2,
-  "name": "[DEVELOPMENT] Webpack Chrome Extension Reloader Sample",
+  "name": "Webpack WebExtension Reloader Sample",
   "version": "0.1",
   "background": {
     "scripts": ["background.bundle.js"]
