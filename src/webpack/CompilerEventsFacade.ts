@@ -1,7 +1,7 @@
 import { Compilation, Compiler } from "webpack";
 
 export default class CompilerEventsFacade {
-  public static extensionName = "webpack-extension-reloader";
+  public static extensionName = "webpack-ext-reloader";
 
   private _compiler: Compiler;
 

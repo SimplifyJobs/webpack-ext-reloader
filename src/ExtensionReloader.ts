@@ -9,7 +9,7 @@ import { extractEntries } from "./utils/manifest";
 import AbstractPluginReloader from "./webpack/AbstractExtensionReloader";
 import CompilerEventsFacade from "./webpack/CompilerEventsFacade";
 
-import { IExtensionReloaderInstance, IPluginOptions } from "../typings/webpack-extension-reloader";
+import { IExtensionReloaderInstance, IPluginOptions } from "../typings/webpack-ext-reloader";
 
 export default class ExtensionReloaderImpl extends AbstractPluginReloader implements IExtensionReloaderInstance {
   private _opts?: IPluginOptions;

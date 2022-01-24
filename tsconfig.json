@@ -17,10 +17,7 @@
       "modules": false
     }
   ],
-  "files": [
-    "typings/index.d.ts",
-    "typings/webpack-extension-reloader.d.ts"
-  ],
+  "files": ["typings/index.d.ts", "typings/webpack-ext-reloader.d.ts"],
   "include": ["client/**/*", "src/**/*", "specs/**/*", "typings/*.d.ts"],
   "exclude": ["node_modules", "**/*.spec.ts", "**/*.raw.ts"],
   "extensions": {

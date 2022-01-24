@@ -2,11 +2,8 @@
 import { resolve } from "path";
 import { cwd } from "process";
 import { log } from "util";
-import {
-  DEFAULT_CONFIG,
-  DEFAULT_PORT,
-} from "../src/constants/options.constants";
-import { IPluginOptions } from "../typings/webpack-extension-reloader";
+import { DEFAULT_CONFIG, DEFAULT_PORT } from "../src/constants/options.constants";
+import { IPluginOptions } from "../typings/webpack-ext-reloader";
 import { CONFIG, HELP, MANIFEST, NO_PAGE_RELOAD, PORT } from "./args.constant";
 import { SIG_EXIT } from "./events.constants";
 import manual from "./manual";

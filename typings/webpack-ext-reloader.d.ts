@@ -11,9 +11,7 @@ export interface IExtensionReloaderInstance {
   apply(compiler: Compiler): void;
 }
 
-export type ExtensionReloader = new (
-  options?: IPluginOptions,
-) => IExtensionReloaderInstance;
+export type ExtensionReloader = new (options?: IPluginOptions) => IExtensionReloaderInstance;
 
 declare module "webpack-extension-reloader" {
   export default ExtensionReloader;
