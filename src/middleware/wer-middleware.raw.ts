@@ -7,7 +7,7 @@
 /* -------------------------------------------------- */
 (function(window) {
 
-  const injectionContext = window || this || {browser: null};
+  const injectionContext = this || window || {browser: null};
 
   (function() {
     `<%= polyfillSource %>`;
@@ -28,7 +28,7 @@
   } = signals;
   const { RECONNECT_INTERVAL, SOCKET_ERR_CODE_REF } = config;
 
-  const { extension, runtime, tabs } = browser || {};
+  const { extension, runtime, tabs } = browser;
   const manifest = runtime.getManifest();
 
   // =============================== Helper functions ======================================= //
@@ -44,7 +44,7 @@
     runtime.onMessage.addListener(({ type, payload }: { type: string; payload: any }) => {
       switch (type) {
         case SIGN_RELOAD:
-          logger("Detected Changes. Reloading ...");
+          logger("Detected Changes. Reloading...");
           reloadPage && window.location.reload();
           break;
         case SIGN_LOG:
@@ -119,7 +119,7 @@
     runtime.onMessage.addListener(({ type, payload }: { type: string; payload: any }) => {
       switch (type) {
         case SIGN_CHANGE:
-          logger("Detected Changes. Reloading ...");
+          logger("Detected Changes. Reloading...");
           reloadPage && window.location.reload();
           break;
 
