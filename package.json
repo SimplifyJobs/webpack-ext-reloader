@@ -27,7 +27,8 @@
     "test": "NODE_ENV=test webpack && mocha dist/tests.js",
     "analyze": "NODE_ENV=production webpack --env.analyze",
     "start:dev": "NODE_ENV=development webpack --watch",
-    "start:sample": "NODE_ENV=development webpack --config sample/webpack.plugin.js --watch",
+    "start:sample:chrome": "NODE_ENV=development webpack --config sample/webpack.plugin.js --watch",
+    "start:sample:firefox": "NODE_ENV=development webpack --config sample/webpack.plugin.js --watch",
     "prepublishOnly": "npm run build",
     "lint": "eslint \"{src,client,typings,specs}/**/*.ts\" --fix --format codeframe",
     "format": "prettier --write \"{src,client,typings,specs}/**/*.ts\"",
@@ -49,6 +50,7 @@
     "hot-reload"
   ],
   "dependencies": {
+    "@types/webextension-polyfill": "^0.8.2",
     "@types/webpack": "^5.28.0",
     "@types/webpack-sources": "^3.2.0",
     "colors": "^1.4.0",
