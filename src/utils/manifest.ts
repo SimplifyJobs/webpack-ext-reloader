@@ -13,7 +13,7 @@ export function extractEntries(
   const { filename } = webpackOutput;
 
   if (!filename) {
-    throw new Error();
+    throw new Error("Please specify the `output.filename` in your webpack config.");
   }
 
   if (!background?.scripts) {
