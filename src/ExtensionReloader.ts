@@ -20,10 +20,10 @@ export default class ExtensionReloaderImpl extends AbstractPluginReloader implem
     this._chunkVersions = {};
   }
 
-  public _isWebpackGToEV4() {
+  public _isWebpackGToEV5() {
     if (version) {
       const [major] = version.split(".");
-      if (parseInt(major, 10) >= 4) {
+      if (parseInt(major, 10) >= 5) {
         return true;
       }
     }
@@ -105,7 +105,7 @@ export default class ExtensionReloaderImpl extends AbstractPluginReloader implem
   }
 
   public apply(compiler: Compiler) {
-    if ((this._isWebpackGToEV4() ? compiler.options.mode : process.env.NODE_ENV) === "development") {
+    if ((this._isWebpackGToEV5() ? compiler.options.mode : process.env.NODE_ENV) === "development") {
       this._registerPlugin(compiler);
     } else {
       warn(onlyOnDevelopmentMsg.get());
