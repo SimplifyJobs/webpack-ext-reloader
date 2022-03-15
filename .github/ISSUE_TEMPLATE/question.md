@@ -32,4 +32,4 @@ add your webpack config here
 
 #### Additional information
 
-[//]: # (Add any addittional infomration about the bug/problem here.)
+[//]: # (Add any additional information about the bug/problem here.)

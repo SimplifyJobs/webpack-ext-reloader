@@ -26,4 +26,4 @@ add an example of desired code here if relevant
 
 #### Additional information
 
-[//]: # (Add any addittional infomration about the bug/problem here.)
+[//]: # (Add any additional information about the bug/problem here.)
