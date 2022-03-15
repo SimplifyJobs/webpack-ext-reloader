@@ -31,7 +31,7 @@ yarn add webpack-ext-reloader --dev
 
 ## What is this?
 
-This is a webpack plugin that allows you to bring hot reloading functionality to WebExtensions, essentially `webpack-dev-server`, but for WebExtensions.
+This is a webpack plugin that allows you to bring hot reloading functionality to WebExtensions, essentially `webpack-dev-server`, but for (WebExtensions)[https://developer.mozilla.org/en-US/docs/Mozilla/Add-ons/WebExtensions].
 
 This is a fork from [`webpack-extension-reloader`](https://github.com/rubenspgcavalcante/webpack-extension-reloader), maintained and updated by the team here at Simplify. The goal here is to continue to support the latest version of webpack (`webpack-extension-reloader` only supports webpack v4) while adding new improvements (i.e. HMR).
 
@@ -47,7 +47,7 @@ Add `webpack-ext-reloader` to the plugins section of your webpack configuration 
 For outputing not only the `manifest.json` but other static files too, use `CopyWebpackPlugin`.
 
 ```js
-const ExtReloader  = require('webpack-ext-reloader');
+const ExtReloader = require('webpack-ext-reloader');
 
 plugins: [
   new ExtReloader(),
