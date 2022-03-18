@@ -1,11 +1,12 @@
-/* eslint:disable */
+/* eslint-disable */
 /* -------------------------------------------------- */
 /*      Start of Webpack Hot Extension Middleware     */
 /* ================================================== */
 /*  This will be converted into a lodash templ., any  */
 /*  external argument must be provided using it       */
 /* -------------------------------------------------- */
-(function(window) {
+(function() {
+  try {window} catch {var window: any;};
 
   const injectionContext = this || window || {browser: null};
 
@@ -28,7 +29,7 @@
   } = signals;
   const { RECONNECT_INTERVAL, SOCKET_ERR_CODE_REF } = config;
 
-  const { extension, runtime, tabs } = browser;
+  const { runtime, tabs } = browser;
   const manifest = runtime.getManifest();
 
   // =============================== Helper functions ======================================= //
@@ -45,7 +46,8 @@
       switch (type) {
         case SIGN_RELOAD:
           logger("Detected Changes. Reloading...");
-          reloadPage && window.location.reload();
+          // eslint-disable-next-line no-var,vars-on-top,block-scoped-var
+          reloadPage && window?.location.reload();
           break;
         case SIGN_LOG:
           console.info(payload);
@@ -120,7 +122,7 @@
       switch (type) {
         case SIGN_CHANGE:
           logger("Detected Changes. Reloading...");
-          reloadPage && window.location.reload();
+          reloadPage && window?.location.reload();
           break;
 
         case SIGN_LOG:
@@ -135,10 +137,10 @@
 
   // ======================= Bootstraps the middleware =========================== //
   runtime.reload
-    ? extension.getBackgroundPage() === window ? backgroundWorker(new WebSocket(wsHost)) : extensionPageWorker()
+    ? !window ? backgroundWorker(new WebSocket(wsHost)) : extensionPageWorker()
     : contentScriptWorker();
-})(window);
-
+})();
+/* eslint-disable */
 /* ----------------------------------------------- */
 /* End of Webpack Hot Extension Middleware  */
 /* ----------------------------------------------- */
