@@ -79,7 +79,7 @@
     "@types/lodash": "4.14.180",
     "@types/minimist": "1.2.2",
     "@types/mocha": "9.1.0",
-    "@types/sinon": "10.0.10",
+    "@types/sinon": "10.0.11",
     "@types/useragent": "2.3.1",
     "@types/ws": "8.5.3",
     "@typescript-eslint/eslint-plugin": "5.11.0",
