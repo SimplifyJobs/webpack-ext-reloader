@@ -11,8 +11,6 @@
     window = _window
   }
 
-  console.log('window', window);
-
   const injectionContext = this || {browser: null};
 
   (function() {
