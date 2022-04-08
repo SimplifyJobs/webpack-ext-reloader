@@ -67,13 +67,13 @@
     "webpack": "^5.61.0"
   },
   "devDependencies": {
-    "@babel/core": "7.17.8",
+    "@babel/core": "7.17.9",
     "@babel/eslint-parser": "7.17.0",
     "@babel/plugin-proposal-class-properties": "7.16.7",
     "@babel/plugin-proposal-logical-assignment-operators": "7.16.7",
     "@babel/plugin-proposal-object-rest-spread": "7.17.3",
     "@babel/plugin-syntax-dynamic-import": "7.8.3",
-    "@babel/plugin-transform-regenerator": "7.16.7",
+    "@babel/plugin-transform-regenerator": "7.17.9",
     "@babel/preset-env": "7.16.11",
     "@types/chai": "4.3.0",
     "@types/lodash": "4.14.181",
