@@ -87,7 +87,6 @@ export default class ExtensionReloaderImpl extends AbstractPluginReloader implem
 
     this._eventAPI = new CompilerEventsFacade(compiler);
     this._injector = middlewareInjector(parsedEntries, { port, reloadPage });
-    this._triggerer = changesTriggerer(port, reloadPage);
     this._eventAPI.afterOptimizeChunks((comp, chunks) => {
       comp.assets = {
         ...comp.assets,
@@ -96,6 +95,9 @@ export default class ExtensionReloaderImpl extends AbstractPluginReloader implem
     });
 
     this._eventAPI.afterEmit((comp) => {
+      // reload page after first emit
+      if (!this._triggerer) this._triggerer = changesTriggerer(port, reloadPage);
+
       const { contentOrBgChanged, onlyPageChanged } = this._whatChanged(comp.chunks, parsedEntries);
 
       if (contentOrBgChanged || onlyPageChanged) {
