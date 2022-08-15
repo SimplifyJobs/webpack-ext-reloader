@@ -61,12 +61,10 @@ declare interface IExtensionManifest {
   background?: {
     page?: string;
     scripts?: string[];
+    service_worker?: string;
   };
   icons?: {
     [key: string]: string;
-  };
-  browser_action?: {
-    default_popup: string;
   };
   content_scripts?: [
     {

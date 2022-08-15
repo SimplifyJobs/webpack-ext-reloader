@@ -10,4 +10,8 @@ the provided on 'manifest.json' or 'entry.background' \
 option of the plugin",
 );
 
-export const bgScriptManifestRequiredMsg = new Message(ERROR, 2, "Background script on manifest is required");
+export const bgScriptManifestRequiredMsg = new Message(
+  ERROR,
+  2,
+  "Background script or service worker on manifest is required",
+);
