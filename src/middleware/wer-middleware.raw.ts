@@ -5,7 +5,7 @@
 /*  This will be converted into a lodash templ., any  */
 /*  external argument must be provided using it       */
 /* -------------------------------------------------- */
-(function(window) {
+(function() {
 
   const injectionContext = this || window || {browser: null};
 
@@ -71,7 +71,9 @@
       if (type === SIGN_CHANGE && (!payload || !payload.onlyPageChanged)) {
         tabs.query({ status: "complete" }).then(loadedTabs => {
           loadedTabs.forEach(
-            tab => tab.id && tabs.sendMessage(tab.id, { type: SIGN_RELOAD }),
+            // in MV3 tabs.sendMessage returns a Promise and we need to catch the errors
+            // https://groups.google.com/a/chromium.org/g/chromium-extensions/c/st_Nh7j3908/m/1muOgSX5AwAJ
+            tab => tab.id && tabs.sendMessage(tab.id, { type: SIGN_RELOAD })?.catch(() => null),
           );
           socket.send(
             JSON.stringify({
@@ -137,9 +139,10 @@
 
   // ======================= Bootstraps the middleware =========================== //
   runtime.reload
-    ? extension.getBackgroundPage() === window ? backgroundWorker(new WebSocket(wsHost)) : extensionPageWorker()
+    // in MV3 background service workers don't have access to the DOM
+    ? (typeof window === 'undefined' || extension.getBackgroundPage() === window) ? backgroundWorker(new WebSocket(wsHost)) : extensionPageWorker()
     : contentScriptWorker();
-})(window);
+})();
 
 /* ----------------------------------------------- */
 /* End of Webpack Hot Extension Middleware  */
