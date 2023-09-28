@@ -8,12 +8,13 @@ A Webpack plugin to automatically reload browser extensions during development.
   </a>
   <br>
   <br>
-</div>
 
 [![npm version](https://img.shields.io/npm/v/webpack-ext-reloader)](https://www.npmjs.com/package/webpack-ext-reloader)
 [![Test Status](https://github.com/SimplifyJobs/webpack-ext-reloader/workflows/tests/badge.svg)](https://github.com/SimplifyJobs/webpack-ext-reloader/actions?query=branch%3Amaster)
 [![Known Vulnerabilities](https://snyk.io/test/github/SimplifyJobs/webpack-ext-reloader/badge.svg)](https://snyk.io/test/github/SimplifyJobs/webpack-ext-reloader/)
 [![NPM Downloads](https://img.shields.io/npm/dt/webpack-ext-reloader.svg)](https://www.npmjs.com/package/webpack-ext-reloader)
+
+</div>
 
 ## Installing
 
@@ -176,6 +177,4 @@ Before opening any **issue** or **pull request**, please refer to the [contribut
 
 ### License
 
-This project is a fork from [rubenspgcavalcante/webpack-extension-reloader](https://github.com/rubenspgcavalcante/webpack-extension-reloader), which is licensed under the [MIT license](https://github.com/rubenspgcavalcante/webpack-extension-reloader/blob/master/LICENSE
-
-). All modifications made in this fork are also licensed under the [MIT license](https://github.com/SimplifyJobs/webpack-ext-reloader/blob/master/LICENSE).
+This project is a fork from [rubenspgcavalcante/webpack-extension-reloader](https://github.com/rubenspgcavalcante/webpack-extension-reloader), which is licensed under the [MIT license](https://github.com/rubenspgcavalcante/webpack-extension-reloader/blob/master/LICENSE). All modifications made in this fork are also licensed under the [MIT license](https://github.com/SimplifyJobs/webpack-ext-reloader/blob/master/LICENSE).
