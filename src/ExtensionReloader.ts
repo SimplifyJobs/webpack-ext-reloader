@@ -35,8 +35,8 @@ export default class ExtensionReloaderImpl extends AbstractPluginReloader implem
 
     // eslint-disable-next-line no-restricted-syntax
     for (const chunk of chunks) {
-      const oldVersion = this._chunkVersions[chunk.name];
-      this._chunkVersions[chunk.name] = chunk.hash;
+      const oldVersion = this._chunkVersions[chunk.name as string];
+      this._chunkVersions[chunk.name as string] = chunk.hash;
       if (chunk.hash !== oldVersion) {
         changedChunks.push(chunk);
       }
