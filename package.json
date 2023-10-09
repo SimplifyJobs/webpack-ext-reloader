@@ -106,7 +106,7 @@
     "lint-staged": "14.0.1",
     "mini-css-extract-plugin": "2.7.6",
     "mocha": "10.2.0",
-    "prettier": "2.8.8",
+    "prettier": "3.0.3",
     "raw-loader": "4.0.2",
     "sinon": "13.0.2",
     "source-map-support": "0.5.21",
