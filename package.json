@@ -56,7 +56,6 @@
     "clean-webpack-plugin": "^4.0.0",
     "colors": "^1.4.0",
     "cross-env": "^7.0.3",
-    "json5": "^2.2.3",
     "lodash": "^4.17.21",
     "minimist": "^1.2.6",
     "useragent": "^2.3.0",
