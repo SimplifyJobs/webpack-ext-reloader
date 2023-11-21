@@ -1,5 +1,5 @@
 import { install } from "source-map-support";
-import { DEBUG, ERROR, NONE } from "./constants/log.constants";
+import { DEBUG, ERROR } from "./constants/log.constants";
 import ExtensionReloaderImpl from "./ExtensionReloader";
 import { setLogLevel } from "./utils/logger";
 

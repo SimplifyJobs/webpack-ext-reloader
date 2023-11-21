@@ -8,8 +8,8 @@
     "module": "commonjs",
     "moduleResolution": "node",
     "allowJs": true,
-    "typeRoots": ["typings/index.d.ts"],
-    "types": ["node", "mocha", "webpack", "webpack-sources"]
+    "outDir": "dist/js",
+    "typeRoots": ["node_modules/@types", "typings"]
   },
   "presets": [
     "env",

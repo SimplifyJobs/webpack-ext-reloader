@@ -1,5 +1,4 @@
 import { assert } from "chai";
-import _ from "lodash";
 import { useFakeTimers } from "sinon";
 import { FAST_RELOAD_DEBOUNCING_FRAME } from "../src/constants/fast-reloading.constants";
 import { debounceSignal } from "../src/utils/block-protection";

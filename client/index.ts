@@ -6,6 +6,7 @@ import { SIG_EXIT } from "./events.constants";
 import ExtensionCompiler from "./ExtensionCompiler";
 
 install();
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 const { _, ...args } = minimist(process.argv.slice(2));
 
 try {

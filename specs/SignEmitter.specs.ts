@@ -37,6 +37,7 @@ describe("SignEmitter", () => {
   });
 
   it("Should setup signal debounce as fast reload blocker to avoid extension blocking", () => {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const emitter = new SignEmitter(mockedServer, mockedAgent as Agent);
 
     assert(debounceSpy.calledWith(FAST_RELOAD_DEBOUNCING_FRAME));
@@ -45,6 +46,7 @@ describe("SignEmitter", () => {
 
   it(`Should assign new rules if the Chrome/Chromium version is >= ${NEW_FAST_RELOAD_CHROME_VERSION}`, () => {
     const [major, minor, patch] = NEW_FAST_RELOAD_CHROME_VERSION;
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
     const emitter = new SignEmitter(mockedServer, {
       family: "Chrome",
       major: `${major}`,

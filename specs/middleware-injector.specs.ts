@@ -12,7 +12,7 @@ describe("middleware-injector", () => {
   let singleContentChunks;
   const sourceCode = "console.log('I am a middleware!!!');";
 
-  stub(middlewareSourceBuilder, "default").callsFake((opts) => new RawSource(sourceCode));
+  stub(middlewareSourceBuilder, "default").callsFake(() => new RawSource(sourceCode));
 
   const sourceFactory = stub().callsFake((toConcat: string, file) => ({
     source: () => toConcat + file.source(),
