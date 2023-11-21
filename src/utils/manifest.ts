@@ -1,6 +1,6 @@
 import { readFileSync } from "fs";
 import { flatMapDeep } from "lodash";
-import JSON5 from "json5";
+import * as JSON5 from "json5";
 import { Compiler, Entry } from "webpack";
 import { bgScriptEntryErrorMsg, bgScriptManifestRequiredMsg } from "../messages/errors";
 
