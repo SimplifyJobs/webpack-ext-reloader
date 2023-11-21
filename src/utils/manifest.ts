@@ -21,24 +21,55 @@ export function extractEntries(
     throw new TypeError(bgScriptManifestRequiredMsg.get());
   }
 
-  const bgScriptFileNames = background.service_worker ? [background.service_worker] : background.scripts ?? [];
-  const toRemove = (filename as string).replace("[name]", "");
+  const getEntryFilename = (entryName: string) => {
+    let entryFilename = filename;
+
+    if (typeof entryFilename === "function") {
+      entryFilename = entryFilename({
+        hash: "[hash]",
+        hashWithLength: (length: number) => `[hash:${length}]`,
+        chunk: {
+          id: "[id]",
+          hash: "[chunkhash]",
+          name: entryName,
+        },
+        basename: "[basename]",
+        query: "[query]",
+        contentHashType: "none",
+        contentHash: "[contenthash]",
+        contentHashWithLength: (length: number) => `[contenthash:${length}]`,
+        noChunkHash: false,
+        url: "[url]",
+      });
+    }
+
+    entryFilename = entryFilename.replace("[name]", entryName);
+
+    return entryFilename;
+  };
+
+  const bgScriptFilenames = background.service_worker ? [background.service_worker] : background.scripts ?? [];
 
   const bgWebpackEntry = Object.keys(webpackEntry).find((entryName) =>
-    bgScriptFileNames.some((bgManifest) => bgManifest.replace(toRemove, "") === entryName),
+    bgScriptFilenames.some((bgScriptFilename) => {
+      const entryFilename = getEntryFilename(entryName);
+
+      return bgScriptFilename === entryFilename;
+    }),
   );
 
   if (!bgWebpackEntry) {
     throw new TypeError(bgScriptEntryErrorMsg.get());
   }
 
-  const contentEntries: unknown = contentScripts
-    ? flatMapDeep(Object.keys(webpackEntry), (entryName) =>
-        contentScripts.map(({ js }) =>
-          js.map((contentItem) => contentItem.replace(toRemove, "")).filter((contentItem) => contentItem === entryName),
-        ),
-      )
+  const contentEntries = contentScripts
+    ? flatMapDeep(Object.keys(webpackEntry), (entryName) => {
+        const entryFilename = getEntryFilename(entryName);
+
+        return contentScripts.map(({ js }) => js.filter((jsFilename) => jsFilename === entryFilename));
+      })
     : null;
+
   return {
     background: bgWebpackEntry,
     contentScript: contentEntries as string[],
