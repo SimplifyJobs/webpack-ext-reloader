@@ -4,11 +4,6 @@ import ExtensionReloaderImpl from "./ExtensionReloader";
 import { setLogLevel } from "./utils/logger";
 
 install();
+setLogLevel(process.env.NODE_ENV === "production" ? ERROR : DEBUG);
 
-let logLevel: LOG_LEVEL = ERROR;
-if (process.env.NODE_ENV !== "production") {
-  logLevel = DEBUG;
-}
-
-setLogLevel(logLevel);
 export = ExtensionReloaderImpl;
