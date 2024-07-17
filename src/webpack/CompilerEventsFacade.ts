@@ -1,7 +1,7 @@
-import { Compilation, Compiler } from "webpack";
+import { Compilation, Compiler } from 'webpack';
 
 export default class CompilerEventsFacade {
-  public static extensionName = "webpack-ext-reloader";
+  public static extensionName = 'webpack-ext-reloader';
 
   private _compiler: Compiler;
 
@@ -9,7 +9,7 @@ export default class CompilerEventsFacade {
     this._compiler = compiler;
   }
 
-  public afterOptimizeChunks(call: (compilation: Compilation, chunks: Compilation["chunks"]) => void) {
+  public afterOptimizeChunks(call: (compilation: Compilation, chunks: Compilation['chunks']) => void) {
     return this._compiler.hooks.compilation.tap(CompilerEventsFacade.extensionName, (comp) => {
       const chunks = new Set();
       const afterOptimizeChunkAssets = (chunksAfterOptimization) => {

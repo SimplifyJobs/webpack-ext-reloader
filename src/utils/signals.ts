@@ -1,8 +1,8 @@
-export const SIGN_CHANGE: ActionType = "SIGN_CHANGE";
-export const SIGN_RELOAD: ActionType = "SIGN_RELOAD";
-export const SIGN_RELOADED: ActionType = "SIGN_RELOADED";
-export const SIGN_LOG: ActionType = "SIGN_LOG";
-export const SIGN_CONNECT: ActionType = "SIGN_CONNECT";
+export const SIGN_CHANGE: ActionType = 'SIGN_CHANGE';
+export const SIGN_RELOAD: ActionType = 'SIGN_RELOAD';
+export const SIGN_RELOADED: ActionType = 'SIGN_RELOADED';
+export const SIGN_LOG: ActionType = 'SIGN_LOG';
+export const SIGN_CONNECT: ActionType = 'SIGN_CONNECT';
 
 export const signChange: ActionFactory = ({ reloadPage = true, onlyPageChanged = false }) => ({
   payload: { reloadPage, onlyPageChanged },

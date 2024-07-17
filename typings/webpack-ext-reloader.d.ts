@@ -1,4 +1,4 @@
-import { Compiler } from "webpack";
+import { Compiler } from 'webpack';
 
 export interface IPluginOptions {
   port: number;
@@ -19,7 +19,7 @@ export declare class ExtensionReloader implements IExtensionReloaderInstance {
 
 export default ExtensionReloader;
 
-declare module "webpack-ext-reloader" {
+declare module 'webpack-ext-reloader' {
   export default ExtensionReloader;
   export = IExtensionReloaderInstance;
 }

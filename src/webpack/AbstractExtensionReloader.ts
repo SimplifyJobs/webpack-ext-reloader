@@ -1,5 +1,5 @@
-import { Compiler } from "webpack";
-import CompilerEventsFacade from "./CompilerEventsFacade";
+import { Compiler } from 'webpack';
+import CompilerEventsFacade from './CompilerEventsFacade';
 
 export default abstract class AbstractExtensionReloader {
   public context: any;

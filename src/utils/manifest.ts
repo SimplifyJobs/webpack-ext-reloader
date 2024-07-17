@@ -1,20 +1,20 @@
-import { readFileSync } from "fs";
-import { flatMapDeep } from "lodash";
-import * as JSON5 from "json5";
-import { Compiler, Entry } from "webpack";
-import { bgScriptEntryErrorMsg, bgScriptManifestRequiredMsg } from "../messages/errors";
+import { readFileSync } from 'fs';
+import { flatMapDeep } from 'lodash';
+import * as JSON5 from 'json5';
+import { Compiler, Entry } from 'webpack';
+import { bgScriptEntryErrorMsg, bgScriptManifestRequiredMsg } from '../messages/errors';
 
 export function extractEntries(
   webpackEntry: Entry,
   manifestPath: string,
-  webpackOutput: Compiler["options"]["output"] = {},
+  webpackOutput: Compiler['options']['output'] = {},
 ): IEntriesOption {
   const manifestJson = JSON5.parse(readFileSync(manifestPath).toString()) as IExtensionManifest;
   const { background, content_scripts: contentScripts } = manifestJson;
   const { filename } = webpackOutput;
 
   if (!filename) {
-    throw new Error("Please specify the `output.filename` in your webpack config.");
+    throw new Error('Please specify the `output.filename` in your webpack config.');
   }
 
   if (!(background?.scripts || background?.service_worker)) {
@@ -24,26 +24,26 @@ export function extractEntries(
   const getEntryFilename = (entryName: string) => {
     let entryFilename = filename;
 
-    if (typeof entryFilename === "function") {
+    if (typeof entryFilename === 'function') {
       entryFilename = entryFilename({
-        hash: "[hash]",
+        hash: '[hash]',
         hashWithLength: (length: number) => `[hash:${length}]`,
         chunk: {
-          id: "[id]",
-          hash: "[chunkhash]",
+          id: '[id]',
+          hash: '[chunkhash]',
           name: entryName,
         },
-        basename: "[basename]",
-        query: "[query]",
-        contentHashType: "none",
-        contentHash: "[contenthash]",
+        basename: '[basename]',
+        query: '[query]',
+        contentHashType: 'none',
+        contentHash: '[contenthash]',
         contentHashWithLength: (length: number) => `[contenthash:${length}]`,
         noChunkHash: false,
-        url: "[url]",
+        url: '[url]',
       });
     }
 
-    entryFilename = entryFilename.replace("[name]", entryName);
+    entryFilename = entryFilename.replace('[name]', entryName);
 
     return entryFilename;
   };

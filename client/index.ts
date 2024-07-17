@@ -1,9 +1,9 @@
-import * as minimist from "minimist";
-import { install } from "source-map-support";
-import { log } from "util";
-import argsParser from "./args-parser";
-import { SIG_EXIT } from "./events.constants";
-import ExtensionCompiler from "./ExtensionCompiler";
+import * as minimist from 'minimist';
+import { install } from 'source-map-support';
+import { log } from 'util';
+import argsParser from './args-parser';
+import { SIG_EXIT } from './events.constants';
+import ExtensionCompiler from './ExtensionCompiler';
 
 install();
 // eslint-disable-next-line @typescript-eslint/no-unused-vars

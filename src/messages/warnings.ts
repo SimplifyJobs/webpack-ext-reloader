@@ -1,11 +1,11 @@
 /* eslint-disable no-multi-str */
-import { WARN } from "../constants/log.constants";
-import Message from "./Message";
+import { WARN } from '../constants/log.constants';
+import Message from './Message';
 
 export const onlyOnDevelopmentMsg = new Message(
   WARN,
   1,
-  "Warning, Extension Reloader Plugin was not enabled! \
+  'Warning, Extension Reloader Plugin was not enabled! \
 It runs only on webpack --mode=development (v5 or more) \
-or with NODE_ENV=development (lower versions)",
+or with NODE_ENV=development (lower versions)',
 );

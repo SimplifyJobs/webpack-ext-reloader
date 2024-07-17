@@ -1,5 +1,5 @@
-import { green, red, white, yellow } from "colors/safe";
-import { DEBUG, ERROR, INFO, LOG, WARN } from "../constants/log.constants";
+import { green, red, white, yellow } from 'colors/safe';
+import { DEBUG, ERROR, INFO, LOG, WARN } from '../constants/log.constants';
 
 let logLevel;
 // eslint-disable-next-line no-return-assign

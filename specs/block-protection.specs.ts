@@ -1,9 +1,9 @@
-import { assert } from "chai";
-import { useFakeTimers } from "sinon";
-import { FAST_RELOAD_DEBOUNCING_FRAME } from "../src/constants/fast-reloading.constants";
-import { debounceSignal } from "../src/utils/block-protection";
+import { assert } from 'chai';
+import { useFakeTimers } from 'sinon';
+import { FAST_RELOAD_DEBOUNCING_FRAME } from '../src/constants/fast-reloading.constants';
+import { debounceSignal } from '../src/utils/block-protection';
 
-describe("debounce signals to prevent extension block", () => {
+describe('debounce signals to prevent extension block', () => {
   let calls;
   const clock = useFakeTimers();
 

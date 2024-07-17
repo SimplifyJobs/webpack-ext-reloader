@@ -1,40 +1,40 @@
 /* eslint-disable no-prototype-builtins */
-import { assert } from "chai";
-import { stub } from "sinon";
-import { RawSource } from "webpack-sources";
+import { assert } from 'chai';
+import { stub } from 'sinon';
+import { RawSource } from 'webpack-sources';
 
-import middlewareInjector from "../src/middleware/middleware-injector";
-import * as middlewareSourceBuilder from "../src/middleware/middleware-source-builder";
+import middlewareInjector from '../src/middleware/middleware-injector';
+import * as middlewareSourceBuilder from '../src/middleware/middleware-source-builder';
 
-describe("middleware-injector", () => {
+describe('middleware-injector', () => {
   let assetsBuilder;
   let multipleContentsChunks;
   let singleContentChunks;
   const sourceCode = "console.log('I am a middleware!!!');";
 
-  stub(middlewareSourceBuilder, "default").callsFake(() => new RawSource(sourceCode));
+  stub(middlewareSourceBuilder, 'default').callsFake(() => new RawSource(sourceCode));
 
   const sourceFactory = stub().callsFake((toConcat: string, file) => ({
     source: () => toConcat + file.source(),
   }));
 
   const entriesInfo = {
-    background: { name: "bgChunkName", path: "./path/to/bg-script.js" },
+    background: { name: 'bgChunkName', path: './path/to/bg-script.js' },
     contentScript: {
-      name: "contentChunkName",
-      path: "./path/to/content-script.js",
+      name: 'contentChunkName',
+      path: './path/to/content-script.js',
     },
     extensionPage: {
-      name: "pageChunkName",
-      path: "./path/to/popup.js",
+      name: 'pageChunkName',
+      path: './path/to/popup.js',
     },
     extraContentScript: {
-      name: "extraContentChunkName",
-      path: "./path/to/extra-content-script.js",
+      name: 'extraContentChunkName',
+      path: './path/to/extra-content-script.js',
     },
     extraExtensionPage: {
-      name: "extraPageChunkName",
-      path: "./path/to/options.js",
+      name: 'extraPageChunkName',
+      path: './path/to/options.js',
     },
   };
 
@@ -52,21 +52,21 @@ describe("middleware-injector", () => {
     extensionPage: [entriesInfo.extensionPage.name, entriesInfo.extraExtensionPage.name],
   };
 
-  const fakeCssPath = "./path/to/some.css";
-  const fakeImgPath = "./path/to/a/random-image.png";
+  const fakeCssPath = './path/to/some.css';
+  const fakeImgPath = './path/to/a/random-image.png';
 
   const assets = {
-    [entriesInfo.background.path]: { source: () => "const bg = true;" },
-    [entriesInfo.contentScript.path]: { source: () => "const cs = true;" },
+    [entriesInfo.background.path]: { source: () => 'const bg = true;' },
+    [entriesInfo.contentScript.path]: { source: () => 'const cs = true;' },
     [entriesInfo.extraContentScript.path]: {
-      source: () => "const extraCs = true;",
+      source: () => 'const extraCs = true;',
     },
-    [entriesInfo.extensionPage.path]: { source: () => "const ep = true;" },
+    [entriesInfo.extensionPage.path]: { source: () => 'const ep = true;' },
     [entriesInfo.extraExtensionPage.path]: {
-      source: () => "const extraEp = true;",
+      source: () => 'const extraEp = true;',
     },
-    [fakeCssPath]: { source: () => "some-css-source" },
-    [fakeImgPath]: { source: () => "some-base64-source" },
+    [fakeCssPath]: { source: () => 'some-css-source' },
+    [fakeImgPath]: { source: () => 'some-base64-source' },
   };
 
   beforeEach(() => {
@@ -80,7 +80,7 @@ describe("middleware-injector", () => {
         files: [entriesInfo.extensionPage.path, fakeCssPath],
         name: options.extensionPage,
       },
-      { name: "someOtherAsset", files: [fakeImgPath] },
+      { name: 'someOtherAsset', files: [fakeImgPath] },
     ];
 
     const [firstContent, secondContent] = options2.contentScript as string[];
@@ -112,11 +112,11 @@ describe("middleware-injector", () => {
         files: [entriesInfo.extraExtensionPage.path],
         name: secondPage,
       },
-      { name: "someOtherAsset", files: [fakeImgPath] },
+      { name: 'someOtherAsset', files: [fakeImgPath] },
     ];
   });
 
-  describe("Injecting middleware into background and content script entries", () => {
+  describe('Injecting middleware into background and content script entries', () => {
     let assetsSingleContent;
     let assetsMultiContent;
     beforeEach(() => {
@@ -127,7 +127,7 @@ describe("middleware-injector", () => {
       assetsMultiContent = assetsBuilder(assets, multipleContentsChunks);
     });
 
-    it("Should inject into the background script", () => {
+    it('Should inject into the background script', () => {
       const newBgSource = assetsSingleContent[entriesInfo.background.path].source();
       const oldBgSource = assets[entriesInfo.background.path].source();
 
@@ -135,14 +135,14 @@ describe("middleware-injector", () => {
       assert.include(newBgSource, sourceCode);
     });
 
-    it("Should inject into a single contentScript", () => {
+    it('Should inject into a single contentScript', () => {
       const newContentSource = assetsSingleContent[entriesInfo.contentScript.path].source();
       const oldContentSource = assets[entriesInfo.contentScript.path].source();
       assert.include(newContentSource, oldContentSource);
       assert.include(newContentSource, sourceCode);
     });
 
-    it("Should inject into the multiple contentScripts", () => {
+    it('Should inject into the multiple contentScripts', () => {
       const newFirstContentSource = assetsMultiContent[entriesInfo.contentScript.path].source();
       const oldFirstContentSource = assets[entriesInfo.contentScript.path].source();
 
@@ -157,14 +157,14 @@ describe("middleware-injector", () => {
       assert.include(newSecondContentSource, sourceCode);
     });
 
-    it("Should inject into a single extensionPage", () => {
+    it('Should inject into a single extensionPage', () => {
       const newContentSource = assetsSingleContent[entriesInfo.extensionPage.path].source();
       const oldContentSource = assets[entriesInfo.extensionPage.path].source();
       assert.include(newContentSource, oldContentSource);
       assert.include(newContentSource, sourceCode);
     });
 
-    it("Should inject into the multiple extensionPages", () => {
+    it('Should inject into the multiple extensionPages', () => {
       const newFirstContentSource = assetsMultiContent[entriesInfo.extensionPage.path].source();
       const oldFirstContentSource = assets[entriesInfo.extensionPage.path].source();
 
@@ -180,7 +180,7 @@ describe("middleware-injector", () => {
     });
   });
 
-  it("Should return only changed assets", () => {
+  it('Should return only changed assets', () => {
     assetsBuilder = middlewareInjector(options, templateOpts);
     const newAssets = assetsBuilder(assets, singleContentChunks, sourceFactory);
 

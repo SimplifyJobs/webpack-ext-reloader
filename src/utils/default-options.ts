@@ -4,7 +4,7 @@ import {
   DEFAULT_EXTENSION_PAGE_ENTRY,
   DEFAULT_PORT,
   DEFAULT_RELOAD_PAGE,
-} from "../constants/options.constants";
+} from '../constants/options.constants';
 
 export default {
   entries: {

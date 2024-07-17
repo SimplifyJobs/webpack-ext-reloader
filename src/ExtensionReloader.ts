@@ -1,15 +1,15 @@
-import { merge } from "lodash";
-import { Chunk, Compilation, Compiler, Entry, version } from "webpack";
-import { changesTriggerer } from "./hot-reload";
-import { onlyOnDevelopmentMsg } from "./messages/warnings";
-import { middlewareInjector } from "./middleware";
-import defaultOptions from "./utils/default-options";
-import { warn } from "./utils/logger";
-import { extractEntries } from "./utils/manifest";
-import AbstractPluginReloader from "./webpack/AbstractExtensionReloader";
-import CompilerEventsFacade from "./webpack/CompilerEventsFacade";
+import { merge } from 'lodash';
+import { Chunk, Compilation, Compiler, Entry, version } from 'webpack';
+import { changesTriggerer } from './hot-reload';
+import { onlyOnDevelopmentMsg } from './messages/warnings';
+import { middlewareInjector } from './middleware';
+import defaultOptions from './utils/default-options';
+import { warn } from './utils/logger';
+import { extractEntries } from './utils/manifest';
+import AbstractPluginReloader from './webpack/AbstractExtensionReloader';
+import CompilerEventsFacade from './webpack/CompilerEventsFacade';
 
-import { IExtensionReloaderInstance, IPluginOptions } from "../typings/webpack-ext-reloader";
+import { IExtensionReloaderInstance, IPluginOptions } from '../typings/webpack-ext-reloader';
 
 export default class ExtensionReloaderImpl extends AbstractPluginReloader implements IExtensionReloaderInstance {
   private _opts?: IPluginOptions;
@@ -22,7 +22,7 @@ export default class ExtensionReloaderImpl extends AbstractPluginReloader implem
 
   public _isWebpackGToEV5() {
     if (version) {
-      const [major] = version.split(".");
+      const [major] = version.split('.');
       if (parseInt(major, 10) >= 5) {
         return true;
       }
@@ -30,7 +30,7 @@ export default class ExtensionReloaderImpl extends AbstractPluginReloader implem
     return false;
   }
 
-  public _whatChanged(chunks: Compilation["chunks"], { background, contentScript, extensionPage }: IEntriesOption) {
+  public _whatChanged(chunks: Compilation['chunks'], { background, contentScript, extensionPage }: IEntriesOption) {
     const changedChunks = [] as Chunk[];
 
     // eslint-disable-next-line no-restricted-syntax
@@ -81,7 +81,7 @@ export default class ExtensionReloaderImpl extends AbstractPluginReloader implem
       ? extractEntries(
           compiler.options.entry as Entry,
           manifest,
-          compiler.options.output as Compiler["options"]["output"],
+          compiler.options.output as Compiler['options']['output'],
         )
       : entries;
 
@@ -107,7 +107,7 @@ export default class ExtensionReloaderImpl extends AbstractPluginReloader implem
   }
 
   public apply(compiler: Compiler) {
-    if ((this._isWebpackGToEV5() ? compiler.options.mode : process.env.NODE_ENV) === "development") {
+    if ((this._isWebpackGToEV5() ? compiler.options.mode : process.env.NODE_ENV) === 'development') {
       this._registerPlugin(compiler);
     } else {
       warn(onlyOnDevelopmentMsg.get());

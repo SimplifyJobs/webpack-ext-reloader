@@ -1,3 +1,3 @@
-import _changesTriggerer from "./changes-triggerer";
+import _changesTriggerer from './changes-triggerer';
 
 export const changesTriggerer = _changesTriggerer;
