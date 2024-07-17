@@ -1,6 +1,6 @@
 /* eslint-disable no-multi-str */
-import { ERROR } from "../constants/log.constants";
-import Message from "./Message";
+import { ERROR } from '../constants/log.constants';
+import Message from './Message';
 
 export const bgScriptEntryErrorMsg = new Message(
   ERROR,
@@ -13,5 +13,5 @@ option of the plugin",
 export const bgScriptManifestRequiredMsg = new Message(
   ERROR,
   2,
-  "Background script or service worker on manifest is required",
+  'Background script or service worker on manifest is required',
 );

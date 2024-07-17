@@ -1,5 +1,5 @@
-import { debounce, runInContext } from "lodash";
-import { info, warn } from "./logger";
+import { debounce, runInContext } from 'lodash';
+import { info, warn } from './logger';
 
 export const debounceSignal = (deboucingFrame: number, context?: object) => (func: (...args: any[]) => any) => {
   if (context) {
@@ -27,7 +27,7 @@ export const fastReloadBlocker = (maxCalls: number, wait: number, context) => (f
 
       setTimeout(() => {
         clearInterval(logInterval);
-        info("Signing for reload now");
+        info('Signing for reload now');
         func.apply(context, args);
         inWait = false;
       }, wait);

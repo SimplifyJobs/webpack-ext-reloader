@@ -1,6 +1,6 @@
-import { zip } from "lodash";
-import { Agent } from "useragent";
-import { OPEN, Server } from "ws";
+import { zip } from 'lodash';
+import { Agent } from 'useragent';
+import { OPEN, Server } from 'ws';
 
 import {
   FAST_RELOAD_CALLS,
@@ -9,9 +9,9 @@ import {
   NEW_FAST_RELOAD_CALLS,
   NEW_FAST_RELOAD_CHROME_VERSION,
   NEW_FAST_RELOAD_DEBOUNCING_FRAME,
-} from "../constants/fast-reloading.constants";
-import { debounceSignal, fastReloadBlocker } from "../utils/block-protection";
-import { signChange } from "../utils/signals";
+} from '../constants/fast-reloading.constants';
+import { debounceSignal, fastReloadBlocker } from '../utils/block-protection';
+import { signChange } from '../utils/signals';
 
 export default class SignEmitter {
   private _safeSignChange: (
@@ -25,7 +25,7 @@ export default class SignEmitter {
 
   constructor(server: Server, { family, major, minor, patch }: Agent) {
     this._server = server;
-    if (family === "Chrome") {
+    if (family === 'Chrome') {
       const [reloadCalls, reloadDeboucingFrame] = this._satisfies(
         [parseInt(major, 10), parseInt(minor, 10), parseInt(patch, 10)],
         NEW_FAST_RELOAD_CHROME_VERSION,

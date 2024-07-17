@@ -1,7 +1,7 @@
-import { bold, white } from "colors/safe";
-import { template } from "lodash";
-import { ERROR, INFO, WARN } from "../constants/log.constants";
-import { REF_URL } from "../constants/reference-docs.constants";
+import { bold, white } from 'colors/safe';
+import { template } from 'lodash';
+import { ERROR, INFO, WARN } from '../constants/log.constants';
+import { REF_URL } from '../constants/reference-docs.constants';
 
 export default class Message {
   private referenceNumber: number;
@@ -29,13 +29,13 @@ export default class Message {
   private getPrefix() {
     switch (this.type) {
       case INFO:
-        return "I";
+        return 'I';
       case WARN:
-        return "W";
+        return 'W';
       case ERROR:
-        return "E";
+        return 'E';
       default:
-        return "";
+        return '';
     }
   }
 }

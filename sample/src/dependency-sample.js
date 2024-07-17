@@ -1,3 +1,3 @@
-import assetContent from "./some-asset.txt";
+import assetContent from './some-asset.txt';
 
 export default () => assetContent;
