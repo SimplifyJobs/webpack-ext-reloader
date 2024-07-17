@@ -1,5 +1,4 @@
 import { readFileSync } from 'fs';
-import { flatMapDeep } from 'lodash';
 import * as JSON5 from 'json5';
 import { Compiler, Entry } from 'webpack';
 import { bgScriptEntryErrorMsg, bgScriptManifestRequiredMsg } from '../messages/errors';
@@ -63,11 +62,12 @@ export function extractEntries(
   }
 
   const contentEntries = contentScripts
-    ? flatMapDeep(Object.keys(webpackEntry), (entryName) => {
-        const entryFilename = getEntryFilename(entryName);
-
-        return contentScripts.map(({ js }) => js.filter((jsFilename) => jsFilename === entryFilename));
-      })
+    ? Object.keys(webpackEntry).filter((entryName) =>
+        contentScripts
+          .flatMap(({ js }) => js)
+          .filter(Boolean)
+          .includes(getEntryFilename(entryName)),
+      )
     : null;
 
   return {
