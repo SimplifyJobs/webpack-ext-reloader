@@ -51,7 +51,6 @@
   ],
   "dependencies": {
     "@types/webextension-polyfill": "^0.10.6",
-    "@types/webpack": "^5.28.5",
     "@types/webpack-sources": "^3.2.3",
     "clean-webpack-plugin": "^4.0.0",
     "colors": "^1.4.0",
