@@ -1,4 +1,3 @@
-/* eslint:disable */
 /* -------------------------------------------------- */
 /*      Start of Webpack Hot Extension Middleware     */
 /* ================================================== */
@@ -7,15 +6,26 @@
 /* -------------------------------------------------- */
 (function() {
 
-  const injectionContext = this || window || {browser: null};
-
   (function() {
     `<%= polyfillSource %>`;
   })();
 
-  const { browser }: any = injectionContext || {};
-  const signals: any = JSON.parse('<%= signals %>');
-  const config: any = JSON.parse('<%= config %>');
+  const formatter = (msg: string) => `[ WER: ${msg} ]`;
+  const logger = (msg, level = "info") => console[level](formatter(msg));
+  const timeFormatter = (date: Date) =>
+    date.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
+
+  // eslint-disable-next-line no-restricted-globals
+  const injectionContext = typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : this;
+  const browser = injectionContext.browser || injectionContext.chrome;
+
+  if (!browser) {
+    logger("Browser API is not available", "warn");
+    return;
+  }
+
+  const signals = JSON.parse('<%= signals %>');
+  const config = JSON.parse('<%= config %>');
 
   const reloadPage: boolean = ("<%= reloadPage %>" as "true" | "false") === "true";
   const wsHost = "<%= WSHost %>";
@@ -30,12 +40,6 @@
 
   const { extension, runtime, tabs } = browser;
   const manifest = runtime.getManifest();
-
-  // =============================== Helper functions ======================================= //
-  const formatter = (msg: string) => `[ WER: ${msg} ]`;
-  const logger = (msg, level = "info") => console[level](formatter(msg));
-  const timeFormatter = (date: Date) =>
-    date.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
 
   // ========================== Called only on content scripts ============================== //
   function contentScriptWorker() {
@@ -71,8 +75,6 @@
       if (type === SIGN_CHANGE && (!payload || !payload.onlyPageChanged)) {
         tabs.query({ status: "complete" }).then(loadedTabs => {
           loadedTabs.forEach(
-            // in MV3 tabs.sendMessage returns a Promise and we need to catch the errors
-            // https://groups.google.com/a/chromium.org/g/chromium-extensions/c/st_Nh7j3908/m/1muOgSX5AwAJ
             tab => tab.id && tabs.sendMessage(tab.id, { type: SIGN_RELOAD })?.catch(() => null),
           );
           socket.send(
@@ -139,7 +141,6 @@
 
   // ======================= Bootstraps the middleware =========================== //
   runtime.reload
-    // in MV3 background service workers don't have access to the DOM
     ? (typeof window === 'undefined' || extension.getBackgroundPage() === window) ? backgroundWorker(new WebSocket(wsHost)) : extensionPageWorker()
     : contentScriptWorker();
 })();
