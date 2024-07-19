@@ -87,7 +87,7 @@ export default class ExtensionReloaderImpl extends AbstractPluginReloader implem
 
     this._eventAPI = new CompilerEventsFacade(compiler);
     this._injector = middlewareInjector(parsedEntries, { port, reloadPage });
-    this._eventAPI.afterOptimizeChunks((comp, chunks) => {
+    this._eventAPI.beforeOptimizeChunks((comp, chunks) => {
       comp.assets = {
         ...comp.assets,
         ...this._injector(comp.assets, chunks),

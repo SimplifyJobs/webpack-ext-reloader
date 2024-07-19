@@ -1,11 +1,9 @@
 import { Compilation } from 'webpack';
-import { ConcatSource, Source } from 'webpack-sources';
-import { SourceFactory } from '../../typings';
+import { ConcatSource } from 'webpack-sources';
 import middleWareSourceBuilder from './middleware-source-builder';
 
 const middlewareInjector: MiddlewareInjector = ({ background, contentScript, extensionPage }, { port, reloadPage }) => {
-  const source: Source = middleWareSourceBuilder({ port, reloadPage });
-  const sourceFactory: SourceFactory = (...sources): Source => new ConcatSource(...sources);
+  const middlewareSource = middleWareSourceBuilder({ port, reloadPage });
 
   const matchBgOrContentOrPage = (name: string) =>
     name === background ||
@@ -19,8 +17,7 @@ const middlewareInjector: MiddlewareInjector = ({ background, contentScript, ext
       if (matchBgOrContentOrPage(name as string)) {
         files.forEach((entryPoint) => {
           if (/\.js$/.test(entryPoint)) {
-            const finalSrc = sourceFactory(source, assets[entryPoint]);
-            prev[entryPoint] = finalSrc;
+            prev[entryPoint] = new ConcatSource(middlewareSource, assets[entryPoint]);
           }
         });
       }
