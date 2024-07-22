@@ -1,6 +1,6 @@
 {
   "name": "webpack-ext-reloader",
-  "version": "1.1.12",
+  "version": "1.1.13",
   "private": false,
   "description": "Watch for file changes and reload WebExtensions on browsers.",
   "main": "dist/webpack-ext-reloader.js",
