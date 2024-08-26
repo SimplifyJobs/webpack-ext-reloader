@@ -74,7 +74,7 @@
     "@babel/plugin-proposal-object-rest-spread": "7.20.7",
     "@babel/plugin-syntax-dynamic-import": "7.8.3",
     "@babel/plugin-transform-regenerator": "7.24.7",
-    "@babel/preset-env": "7.25.3",
+    "@babel/preset-env": "7.25.4",
     "@types/chai": "4.3.17",
     "@types/lodash": "4.17.7",
     "@types/minimist": "1.2.5",
@@ -103,7 +103,7 @@
     "husky": "8.0.3",
     "json-loader": "0.5.7",
     "lint-staged": "15.2.9",
-    "mini-css-extract-plugin": "2.9.0",
+    "mini-css-extract-plugin": "2.9.1",
     "mocha": "10.7.3",
     "prettier": "3.3.3",
     "raw-loader": "4.0.2",
@@ -112,7 +112,7 @@
     "style-loader": "3.3.4",
     "ts-loader": "9.5.1",
     "typescript": "5.5.4",
-    "webpack": "5.93.0",
+    "webpack": "5.94.0",
     "webpack-bundle-analyzer": "4.10.2",
     "webpack-cli": "5.1.4"
   }
