@@ -76,7 +76,7 @@
     "@babel/plugin-transform-regenerator": "7.24.7",
     "@babel/preset-env": "7.25.4",
     "@types/chai": "4.3.19",
-    "@types/lodash": "4.17.7",
+    "@types/lodash": "4.17.9",
     "@types/minimist": "1.2.5",
     "@types/mocha": "10.0.8",
     "@types/sinon": "17.0.3",
