@@ -1,5 +1,5 @@
 import { zip } from 'lodash';
-import { Agent } from 'useragent';
+import { UAParser } from 'ua-parser-js';
 import { OPEN, Server } from 'ws';
 
 import {
@@ -13,6 +13,11 @@ import {
 import { debounceSignal, fastReloadBlocker } from '../utils/block-protection';
 import { signChange } from '../utils/signals';
 
+interface MinimalBrowserInfo {
+  name?: string;
+  version?: string;
+}
+
 export default class SignEmitter {
   private _safeSignChange: (
     reloadPage: boolean,
@@ -23,11 +28,13 @@ export default class SignEmitter {
 
   private _server: Server;
 
-  constructor(server: Server, { family, major, minor, patch }: Agent) {
+  constructor(server: Server, { name, version }: MinimalBrowserInfo) {
     this._server = server;
-    if (family === 'Chrome') {
+    if (name === 'Chrome') {
+      const [major, minor, patch] = (version || '').split('.').map(v => parseInt(v, 10));
+
       const [reloadCalls, reloadDeboucingFrame] = this._satisfies(
-        [parseInt(major, 10), parseInt(minor, 10), parseInt(patch, 10)],
+        [major, minor, patch],
         NEW_FAST_RELOAD_CHROME_VERSION,
       )
         ? [NEW_FAST_RELOAD_CALLS, NEW_FAST_RELOAD_DEBOUNCING_FRAME]
