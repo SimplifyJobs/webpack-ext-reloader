@@ -47,7 +47,7 @@ export function extractEntries(
     return entryFilename;
   };
 
-  const bgScriptFilenames = background.service_worker ? [background.service_worker] : background.scripts ?? [];
+  const bgScriptFilenames = background.service_worker ? [background.service_worker] : (background.scripts ?? []);
 
   const bgWebpackEntry = Object.keys(webpackEntry).find((entryName) =>
     bgScriptFilenames.some((bgScriptFilename) => {

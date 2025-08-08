@@ -1,5 +1,4 @@
 import { zip } from 'lodash';
-import { UAParser } from 'ua-parser-js';
 import { OPEN, Server } from 'ws';
 
 import {
@@ -31,12 +30,9 @@ export default class SignEmitter {
   constructor(server: Server, { name, version }: MinimalBrowserInfo) {
     this._server = server;
     if (name === 'Chrome') {
-      const [major, minor, patch] = (version || '').split('.').map(v => parseInt(v, 10));
+      const [major, minor, patch] = (version || '').split('.').map((v) => parseInt(v, 10));
 
-      const [reloadCalls, reloadDeboucingFrame] = this._satisfies(
-        [major, minor, patch],
-        NEW_FAST_RELOAD_CHROME_VERSION,
-      )
+      const [reloadCalls, reloadDeboucingFrame] = this._satisfies([major, minor, patch], NEW_FAST_RELOAD_CHROME_VERSION)
         ? [NEW_FAST_RELOAD_CALLS, NEW_FAST_RELOAD_DEBOUNCING_FRAME]
         : [FAST_RELOAD_CALLS, FAST_RELOAD_DEBOUNCING_FRAME];
 

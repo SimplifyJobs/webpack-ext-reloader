@@ -15,7 +15,7 @@ import {
 
 describe('SignEmitter', () => {
   let mockedServer: any;
-  let mockedBrowserInfo: { name: string; version: string; };
+  let mockedBrowserInfo: { name: string; version: string };
   let debounceSpy: SinonSpy;
   let warnSpy: SinonSpy;
   let fastReloadBlockerSpy: SinonSpy;
