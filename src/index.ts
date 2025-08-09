@@ -6,4 +6,4 @@ import { setLogLevel } from './utils/logger';
 install();
 setLogLevel(process.env.NODE_ENV === 'production' ? ERROR : DEBUG);
 
-export = ExtensionReloaderImpl;
+export default ExtensionReloaderImpl;
