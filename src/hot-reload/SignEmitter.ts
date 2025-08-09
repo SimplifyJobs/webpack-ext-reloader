@@ -72,7 +72,7 @@ export default class SignEmitter {
   private _satisfies(browserVersion: BrowserVersion, targetVersion: BrowserVersion) {
     const versionPairs: VersionPair[] = zip(browserVersion, targetVersion);
 
-    // eslint-disable-next-line no-restricted-syntax
+     
     for (const [version = 0, target = 0] of versionPairs) {
       if (version !== target) {
         return version > target;

@@ -33,7 +33,7 @@ export default class ExtensionReloaderImpl extends AbstractPluginReloader implem
   public _whatChanged(chunks: Compilation['chunks'], { background, contentScript, extensionPage }: IEntriesOption) {
     const changedChunks = [] as Chunk[];
 
-    // eslint-disable-next-line no-restricted-syntax
+     
     for (const chunk of chunks) {
       const oldVersion = this._chunkVersions[chunk.name as string];
       this._chunkVersions[chunk.name as string] = chunk.hash;

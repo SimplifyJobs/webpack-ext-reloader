@@ -15,7 +15,7 @@
   const timeFormatter = (date: Date) =>
     date.toTimeString().replace(/.*(\d{2}:\d{2}:\d{2}).*/, "$1");
 
-  // eslint-disable-next-line no-restricted-globals
+   
   const injectionContext = typeof globalThis !== "undefined" ? globalThis : typeof self !== "undefined" ? self : this;
   const browser = injectionContext.browser || injectionContext.chrome;
 

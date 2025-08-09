@@ -20,7 +20,7 @@ export default class ExtensionCompiler {
   }
 
   public watch() {
-    // eslint-disable-next-line consistent-return
+     
     this.compiler.watch({}, (err, stats) => {
       if (err) {
         return ExtensionCompiler.treatErrors(err);
