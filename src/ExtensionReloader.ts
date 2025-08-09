@@ -9,7 +9,7 @@ import { extractEntries } from './utils/manifest';
 import AbstractPluginReloader from './webpack/AbstractExtensionReloader';
 import CompilerEventsFacade from './webpack/CompilerEventsFacade';
 
-import { IExtensionReloaderInstance, IPluginOptions } from '../typings/webpack-ext-reloader';
+import { IExtensionReloaderInstance, IPluginOptions } from '../typings/webpack-ext-reloader-internal';
 
 export default class ExtensionReloaderImpl extends AbstractPluginReloader implements IExtensionReloaderInstance {
   private _opts?: IPluginOptions;
@@ -33,7 +33,7 @@ export default class ExtensionReloaderImpl extends AbstractPluginReloader implem
   public _whatChanged(chunks: Compilation['chunks'], { background, contentScript, extensionPage }: IEntriesOption) {
     const changedChunks = [] as Chunk[];
 
-    // eslint-disable-next-line no-restricted-syntax
+     
     for (const chunk of chunks) {
       const oldVersion = this._chunkVersions[chunk.name as string];
       this._chunkVersions[chunk.name as string] = chunk.hash;

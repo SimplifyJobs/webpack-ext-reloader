@@ -1,4 +1,4 @@
-import { parse } from 'useragent';
+import { UAParser } from 'ua-parser-js';
 import { Server } from 'ws';
 import { info } from '../utils/logger';
 import SignEmitter from './SignEmitter';
@@ -14,10 +14,10 @@ export default class HotReloaderServer {
 
   public listen() {
     this._server.on('connection', (ws, msg) => {
-      const userAgent = parse(msg.headers['user-agent']);
-      this._signEmitter = new SignEmitter(this._server, userAgent);
+      const userAgent = new UAParser(msg.headers['user-agent']).getResult();
+      this._signEmitter = new SignEmitter(this._server, userAgent.browser);
 
-      ws.on('message', (data: string) => info(`Message from ${userAgent.family}: ${JSON.parse(data).payload}`));
+      ws.on('message', (data: string) => info(`Message from ${userAgent.browser.name}: ${JSON.parse(data).payload}`));
       ws.on('error', () => {
         // NOOP - swallow socket errors due to http://git.io/vbhSN
       });

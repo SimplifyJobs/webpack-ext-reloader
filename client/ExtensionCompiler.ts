@@ -2,7 +2,7 @@ import { log } from 'util';
 import * as webpack from 'webpack';
 import ExtensionReloaderImpl from '../src/ExtensionReloader';
 import { info } from '../src/utils/logger';
-import { IPluginOptions } from '../typings/webpack-ext-reloader';
+import { IPluginOptions } from '../typings/webpack-ext-reloader-internal';
 
 export default class ExtensionCompiler {
   private static treatErrors(err) {
@@ -20,7 +20,7 @@ export default class ExtensionCompiler {
   }
 
   public watch() {
-    // eslint-disable-next-line consistent-return
+     
     this.compiler.watch({}, (err, stats) => {
       if (err) {
         return ExtensionCompiler.treatErrors(err);

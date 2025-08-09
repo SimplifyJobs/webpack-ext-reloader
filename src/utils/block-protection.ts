@@ -13,7 +13,7 @@ export const fastReloadBlocker = (maxCalls: number, wait: number, context) => (f
   let calls = 0;
   let inWait = false;
 
-  // eslint-disable-next-line consistent-return
+   
   return (...args) => {
     if (inWait) {
       /* do nothing */

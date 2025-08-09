@@ -1,5 +1,4 @@
 import { zip } from 'lodash';
-import { Agent } from 'useragent';
 import { OPEN, Server } from 'ws';
 
 import {
@@ -13,6 +12,11 @@ import {
 import { debounceSignal, fastReloadBlocker } from '../utils/block-protection';
 import { signChange } from '../utils/signals';
 
+interface MinimalBrowserInfo {
+  name?: string;
+  version?: string;
+}
+
 export default class SignEmitter {
   private _safeSignChange: (
     reloadPage: boolean,
@@ -23,13 +27,12 @@ export default class SignEmitter {
 
   private _server: Server;
 
-  constructor(server: Server, { family, major, minor, patch }: Agent) {
+  constructor(server: Server, { name, version }: MinimalBrowserInfo) {
     this._server = server;
-    if (family === 'Chrome') {
-      const [reloadCalls, reloadDeboucingFrame] = this._satisfies(
-        [parseInt(major, 10), parseInt(minor, 10), parseInt(patch, 10)],
-        NEW_FAST_RELOAD_CHROME_VERSION,
-      )
+    if (name === 'Chrome') {
+      const [major, minor, patch] = (version || '').split('.').map((v) => parseInt(v, 10));
+
+      const [reloadCalls, reloadDeboucingFrame] = this._satisfies([major, minor, patch], NEW_FAST_RELOAD_CHROME_VERSION)
         ? [NEW_FAST_RELOAD_CALLS, NEW_FAST_RELOAD_DEBOUNCING_FRAME]
         : [FAST_RELOAD_CALLS, FAST_RELOAD_DEBOUNCING_FRAME];
 
@@ -69,7 +72,7 @@ export default class SignEmitter {
   private _satisfies(browserVersion: BrowserVersion, targetVersion: BrowserVersion) {
     const versionPairs: VersionPair[] = zip(browserVersion, targetVersion);
 
-    // eslint-disable-next-line no-restricted-syntax
+     
     for (const [version = 0, target = 0] of versionPairs) {
       if (version !== target) {
         return version > target;

@@ -6,7 +6,18 @@ import { bgScriptEntryErrorMsg, bgScriptManifestRequiredMsg } from '../messages/
 export function extractEntries(
   webpackEntry: Entry,
   manifestPath: string,
-  webpackOutput: Compiler['options']['output'] = {},
+  webpackOutput: Compiler['options']['output'] = {
+    enabledChunkLoadingTypes: [],
+    enabledLibraryTypes: [],
+    enabledWasmLoadingTypes: [],
+    environment: {
+      arrowFunction: true,
+      const: true,
+      destructuring: true,
+      dynamicImport: true,
+      module: true,
+    },
+  },
 ): IEntriesOption {
   const manifestJson = JSON5.parse(readFileSync(manifestPath).toString()) as IExtensionManifest;
   const { background, content_scripts: contentScripts } = manifestJson;
@@ -47,7 +58,7 @@ export function extractEntries(
     return entryFilename;
   };
 
-  const bgScriptFilenames = background.service_worker ? [background.service_worker] : background.scripts ?? [];
+  const bgScriptFilenames = background.service_worker ? [background.service_worker] : (background.scripts ?? []);
 
   const bgWebpackEntry = Object.keys(webpackEntry).find((entryName) =>
     bgScriptFilenames.some((bgScriptFilename) => {
