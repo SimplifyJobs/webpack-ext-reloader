@@ -5,6 +5,7 @@ import './changes-triggerer.specs';
 import './ExtensionReloader.specs';
 import './middleware-injector.specs';
 import './middleware-source-builder.specs';
+import './resolve-options.specs';
 import './SignEmitter.specs';
 
 install();
