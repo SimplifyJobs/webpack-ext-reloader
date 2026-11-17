@@ -1,11 +1,10 @@
-import { merge } from 'lodash';
 import { Chunk, Compilation, Compiler, Entry, version } from 'webpack';
 import { changesTriggerer } from './hot-reload';
 import { onlyOnDevelopmentMsg } from './messages/warnings';
 import { middlewareInjector } from './middleware';
-import defaultOptions from './utils/default-options';
 import { warn } from './utils/logger';
 import { extractEntries } from './utils/manifest';
+import resolveOptions from './utils/resolve-options';
 import AbstractPluginReloader from './webpack/AbstractExtensionReloader';
 import CompilerEventsFacade from './webpack/CompilerEventsFacade';
 
@@ -55,7 +54,7 @@ export default class ExtensionReloaderImpl extends AbstractPluginReloader implem
       return contentChanged || bgChanged;
     });
 
-    //
+    
     const onlyPageChanged =
       !contentOrBgChanged &&
       changedChunks.some(({ name }) => {
@@ -66,7 +65,7 @@ export default class ExtensionReloaderImpl extends AbstractPluginReloader implem
         } else {
           pageChanged = name === extensionPage;
         }
-        //
+        
 
         return pageChanged;
       });
@@ -75,7 +74,7 @@ export default class ExtensionReloaderImpl extends AbstractPluginReloader implem
   }
 
   public _registerPlugin(compiler: Compiler) {
-    const { reloadPage, port, entries, manifest } = merge(defaultOptions, this._opts);
+    const { reloadPage, port, entries, manifest } = resolveOptions(this._opts);
 
     const parsedEntries: IEntriesOption = manifest
       ? extractEntries(
